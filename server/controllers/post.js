@@ -49,7 +49,7 @@ exports.deletePost = async (req, res) => {
         }
 
         await post.remove();
-        
+
 
         const user = await User.findById(req.user._id);
 
@@ -106,4 +106,30 @@ exports.likeUnlikePost = async (req, res) => {
             message: error.message,
         })
     }
-}
+};
+
+exports.getFollowingPost = async(req,res) => {
+    try {
+        
+        const user = await User.findById(req.user._id);
+        console.log(user.following);
+        const posts = await Post.find({
+            owner: {
+                $in: user.following,
+            }
+        });
+        console.log(posts);
+        res.status(200).json({
+            success: true,
+            posts,
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+};
+
+
