@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({
     caption: String,
+    location: String,
     image: {
         public_id: String,
         url: String,
@@ -32,7 +33,6 @@ const postSchema = new mongoose.Schema({
             }
         }
     ],
-    location: String,
 
 });
 
