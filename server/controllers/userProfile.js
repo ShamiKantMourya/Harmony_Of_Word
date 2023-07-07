@@ -1,15 +1,15 @@
 const User = require("../models/User");
-
+const Post = require("../models/Post");
 //Update Profile
 
-exports.updateProfile = async(req, res) => {
+exports.updateProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
-        const {name, email} = req.body;
-        if(name){
+        const { name, email } = req.body;
+        if (name) {
             user.name = name;
         }
-        if(email){
+        if (email) {
             user.email = email;
         }
 
@@ -32,13 +32,13 @@ exports.updateProfile = async(req, res) => {
 
 //Update Pasword
 
-exports.updatePassword = async(req, res) => {
+exports.updatePassword = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).select("+password");
 
-        const {oldPassword, newPassword} = req.body;
+        const { oldPassword, newPassword } = req.body;
 
-        if(!oldPassword || !newPassword){
+        if (!oldPassword || !newPassword) {
             return res.status(400).json({
                 success: false,
                 message: "Please provide old and new password",
@@ -47,10 +47,10 @@ exports.updatePassword = async(req, res) => {
 
         const isMatch = await user.matchPassword(oldPassword);
 
-        if(!isMatch){
+        if (!isMatch) {
             return res.status(400).json({
                 success: false,
-                message:  "Incorrect old password",
+                message: "Incorrect old password",
             });
         }
 
@@ -59,10 +59,73 @@ exports.updatePassword = async(req, res) => {
         await user.save();
 
         res.status(200).json({
-            success:true,
+            success: true,
             message: "Password updated",
         });
 
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+};
+
+
+exports.myProfile = async(req, res) => {
+
+    try {
+        
+        const user = await User.findById(req.user._id).populate("posts");
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            user,
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+};
+
+//Delete Profile
+
+exports.deleteProfile = async(req,res) => {
+
+    try {
+        
+        const user = await User.findById(req.user._id);
+        const posts = user.posts;
+        const followers = user.followers;
+        const userId = user._id;
+
+        await user.remove();
+
+        res.cookie("token", null ,{expires: new Date(Date.now()), httpOnly: true});
+
+        for (let i = 0; i < posts.length; i++) {
+            const post = await Post.findById(posts[i]);
+            await post.remove();
+        };
+
+        for (let i = 0; i < followers.length; i++) {
+            const follower = await User.findById(followers[i]);
+
+            const index = follower.following.indexOf(userId)
+
+            follower.following.splice(index,1);
+            await follower.save();
+            
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Profile Deleted",
+        })
     } catch (error) {
         res.status(500).json({
             success: false,
