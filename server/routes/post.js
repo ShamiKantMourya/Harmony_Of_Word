@@ -8,6 +8,6 @@ router.route("/createpost").post(isAuthenticated, createPost);
 router.route("/:id").get(isAuthenticated, likeUnlikePost);
 router.route("/:id").delete(isAuthenticated, deletePost);
 
-router.route("/posts").get(isAuthenticated, getFollowingPost);
+router.route("/followingPosts").get(isAuthenticated, getFollowingPost);
 
 module.exports = router;
