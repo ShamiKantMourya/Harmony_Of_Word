@@ -116,8 +116,9 @@ exports.getFollowingPost = async (req, res) => {
         const posts = await Post.find({
             owner: {
                 $in: user.following,
-            }
+            },
         });
+
         res.status(200).json({
             success: true,
             posts,
@@ -158,6 +159,109 @@ exports.updateCaption = async (req, res) => {
             success: true,
             message: "Post Updated",
         })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+};
+
+exports.makeComments = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                message: "Post not found",
+            });
+        }
+
+        let commentIndex = -1;
+
+        post.comments.forEach((element, index) => {
+            if (element.user.toString() === req.user._id.toString()) {
+                commentIndex = index;
+            }
+        });
+
+        if (commentIndex !== -1) {
+            post.comments[commentIndex].comment = req.body.comment;
+
+            await post.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Comment Updated",
+            })
+        } else {
+            post.comments.push({
+                user: req.user._id,
+                comment: req.body.comment,
+            });
+            await post.save();
+            return res.status(200).json({
+                success: true,
+                message: "Comment Added"
+            })
+        }
+
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+};
+
+exports.deleteComment = async (req, res) => {
+    try {
+
+        const post = await Post.findById(req.params.id);
+
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                message: "Post not found",
+            });
+        }
+
+        if (post.owner.toString() === req.user._id.toString()) {
+            if(req.body.commentId === undefined){
+                return res.status(400).json({
+                    success: false,
+                    message: "Cannot find post with this id",
+                })
+            }
+            post.comments.forEach((element, index) => {
+                if (element._id.toString() === req.body.commentId.toString()) {
+                    return post.comments.splice(index, 1);
+                }
+            });
+
+            await post.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Selected comment deleted",
+            })
+        } else {
+            post.comments.forEach((element, index) => {
+                if (element.user.toString() === req.user._id.toString()) {
+                    return post.comments.splice(index, 1);
+                }
+            });
+
+            await post.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Comment Deleted",
+            })
+        }
 
     } catch (error) {
         res.status(500).json({
