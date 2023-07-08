@@ -1,7 +1,16 @@
 const express = require("express");
 const { registerUser, loginUser, followUser, logoutUser } = require("../controllers/user");
-const {isAuthenticated} = require("../middlewares/auth");
-const { updatePassword, updateProfile, deleteProfile, myProfile } = require("../controllers/userProfile");
+const { isAuthenticated } = require("../middlewares/auth");
+const {
+    updatePassword,
+    updateProfile,
+    deleteProfile,
+    myProfile,
+    getUserProfile,
+    getAllUserData,
+    forgetPassword,
+    resetPassword
+} = require("../controllers/userProfile");
 
 const router = express.Router();
 
@@ -21,6 +30,15 @@ router.route("/update/profile").put(isAuthenticated, updateProfile);
 
 router.route("/myProfile").get(isAuthenticated, myProfile);
 
+router.route("/:id").get(isAuthenticated, getUserProfile);
+
+router.route("/allProfile").get(isAuthenticated, getAllUserData); //not working properly
+
 router.route("/delete/profile").delete(isAuthenticated, deleteProfile);
+
+// Forget Password
+router.route("/forgetpassword").post(forgetPassword);
+
+router.route("/password/reset/:token").put(resetPassword);
 
 module.exports = router;
