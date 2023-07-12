@@ -29,13 +29,13 @@ const Header = () => {
                 <div className='header-logo'>
                     <p className='header-logo-text'><span>H</span>armony_Of_Words</p>
                 </div>
-                <div className='header-search'>
+                <div className={displayNav ? "header-search mobile_view-search" : "header-search"}>
                     <div className='search-bar'>
                         <input type='text' placeholder='Search.........' className='input-field' />
                         <button className='search-btn'><Search /></button>
                     </div>
                 </div>
-                <div className={displayNav ? "header-icons mobileView-header-icons" : "header-icons"}>
+                <div className={displayNav ? "header-icons  mobileView-header-icons" : "header-icons"}>
                     <Link to="/"><Home /></Link>
                     <Link to=""><Add /></Link>
                     <Link to=""><Chat /></Link>

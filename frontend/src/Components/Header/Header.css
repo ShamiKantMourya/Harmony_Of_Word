@@ -134,7 +134,8 @@
 @media (max-width: 998px) {
     .header{
         height: 4rem;
-        grid-template-columns: 2rem 2fr 3fr 2rem 2rem;
+        grid-template-columns: 2rem 3fr 2fr 2rem 2rem;
+        grid-template-rows: 4rem 0.4fr
     }
     .header-icons{
         display: none;
@@ -142,10 +143,19 @@
     .header-search{
         display: none;
     }
+    .mobile_view-search{
+        padding: 0px 10px;
+        display: block;
+       grid-column: 3/6 ;
+       margin: 0px;
+       width: 100%;
+       background-color: var(--ac_black);
+    }
     .hamburger-icon{
         display: block;
         display: grid;
         grid-column: 4/5;
+        grid-row: 1/2;
         justify-content: center;
         align-items: center;
     }
@@ -155,9 +165,27 @@
         border: none;
         outline: none; 
         cursor: pointer;
+        display: grid;
+        justify-content: center;
+        align-items: center;
     }
     .mobileView-header-icons{
         display: block;
-        display: grid;
+        position: relative;
+        grid-column: 3/6;
+       background-color: var(--ac_black);
+        height: 15rem;
     }
+    .mobile-menu-link {
+        display: grid;
+        grid-row: 3/4;
+        transition: all 2s linear;
+      }
+      .mobileView-header-icons a{
+        margin-top: 18px;
+        background-color: var(--ac_black);
+      }
+      .mobile_view-search .search-bar button{
+       font-size: 10px;
+      }
 }
