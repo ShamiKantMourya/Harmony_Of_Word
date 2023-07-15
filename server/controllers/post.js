@@ -14,6 +14,8 @@ exports.createPost = async (req, res) => {
         const newPost = await Post.create(newPostData);
 
         const user = await User.findById(req.user._id);
+        // console.log(user);
+
         user.posts.push(newPost._id);
 
         await user.save();
@@ -33,7 +35,7 @@ exports.createPost = async (req, res) => {
 exports.deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
-        console.log(post);
+        // console.log(post);
         if (!post) {
             return res.status(404).json({
                 success: false,
@@ -52,6 +54,7 @@ exports.deletePost = async (req, res) => {
 
 
         const user = await User.findById(req.user._id);
+
 
         const index = user.posts.indexOf(req.params.id);
 
@@ -110,8 +113,9 @@ exports.likeUnlikePost = async (req, res) => {
 
 exports.getFollowingPost = async (req, res) => {
     try {
-
-        const user = await User.findById(req.user._id);
+        const userId = req.user._id;
+        const user = await User.findById(userId);
+        console.log(user);
 
         const posts = await Post.find({
             owner: {
