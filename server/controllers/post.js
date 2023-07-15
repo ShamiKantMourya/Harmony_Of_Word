@@ -115,14 +115,14 @@ exports.getFollowingPost = async (req, res) => {
     try {
         const userId = req.user._id;
         const user = await User.findById(userId);
-        console.log(user);
+        // console.log(user);
 
         const posts = await Post.find({
             owner: {
                 $in: user.following,
-            },
+            }
         });
-
+console.log(posts);
         res.status(200).json({
             success: true,
             posts,
