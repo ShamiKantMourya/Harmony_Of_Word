@@ -28,7 +28,7 @@
     display: grid;
     grid-template-columns: 5rem 0.7fr 1.3fr 2fr 5rem;
     background-color: var(--ac_black);
-    
+
 }
 
 .header-logo {
@@ -116,7 +116,8 @@
     justify-content: center;
     align-items: center;
 }
-.header-icons a:first-child{
+
+.header-icons a:first-child {
     grid-column: 2/3;
 }
 
@@ -126,32 +127,41 @@
     justify-content: center;
     align-items: center;
 }
-.hamburger-icon{
+
+.hamburger-icon {
     display: none;
 }
 
 /* Responsive part */
 @media (max-width: 998px) {
-    .header{
+    .header {
         height: 4rem;
         grid-template-columns: 2rem 3fr 2fr 2rem 2rem;
         grid-template-rows: 4rem 0.4fr
     }
-    .header-icons{
+
+    .header-icons {
         display: none;
     }
-    .header-search{
+
+    .header-search {
         display: none;
     }
-    .mobile_view-search{
+
+    .mobile_view-search {
+        /* position: absolute; */
+        transition: 300ms ease-in;
         padding: 0px 10px;
         display: block;
-       grid-column: 3/6 ;
-       margin: 0px;
-       width: 100%;
-       background-color: var(--ac_black);
+        left: 180;
+        grid-column: 3/6;
+        margin: 0px;
+        width: 100%;
+        background-color: var(--ac_black);
+        z-index: 100;
     }
-    .hamburger-icon{
+
+    .hamburger-icon {
         display: block;
         display: grid;
         grid-column: 4/5;
@@ -159,33 +169,38 @@
         justify-content: center;
         align-items: center;
     }
-    .hamburger-icon button{
+
+    .hamburger-icon button {
         color: var(--ac_white);
         background: none;
         border: none;
-        outline: none; 
+        outline: none;
         cursor: pointer;
         display: grid;
         justify-content: center;
         align-items: center;
     }
-    .mobileView-header-icons{
+
+    .mobileView-header-icons {
         display: block;
         position: relative;
         grid-column: 3/6;
-       background-color: var(--ac_black);
+        background-color: var(--ac_black);
         height: 15rem;
     }
+
     .mobile-menu-link {
         display: grid;
         grid-row: 3/4;
         transition: all 2s linear;
-      }
-      .mobileView-header-icons a{
+    }
+
+    .mobileView-header-icons a {
         margin-top: 18px;
         background-color: var(--ac_black);
-      }
-      .mobile_view-search .search-bar button{
-       font-size: 10px;
-      }
+    }
+
+    .mobile_view-search .search-bar button {
+        font-size: 10px;
+    }
 }
