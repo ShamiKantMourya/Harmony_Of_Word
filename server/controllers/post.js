@@ -122,7 +122,7 @@ exports.getFollowingPost = async (req, res) => {
                 $in: user.following,
             }
         });
-console.log(posts);
+// console.log(posts);
         res.status(200).json({
             success: true,
             posts,
