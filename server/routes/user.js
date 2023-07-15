@@ -24,6 +24,8 @@ router.route("/logout").get(logoutUser);
 router.route("/follow/:id").get(isAuthenticated, followUser);
 
 //User Profile Routes
+router.route("/allProfile").get(isAuthenticated, getAllUserData);
+
 router.route("/update/password").put(isAuthenticated, updatePassword);
 
 router.route("/update/profile").put(isAuthenticated, updateProfile);
@@ -32,7 +34,6 @@ router.route("/myProfile").get(isAuthenticated, myProfile);
 
 router.route("/:id").get(isAuthenticated, getUserProfile);
 
-router.route("/allProfile").get(isAuthenticated, getAllUserData); //not working properly
 
 router.route("/delete/profile").delete(isAuthenticated, deleteProfile);
 
