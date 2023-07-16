@@ -44,4 +44,25 @@ export const loadUser = () => async(dispatch) => {
             payload: error.response.data.message,
         });
     }
+};
+
+export const getAllUsers = () => async(dispatch) =>{
+    try {
+
+        dispatch({
+            type: "allUserRequest",
+        })
+
+        const response = await axios.get("/user/all/usersProfile")
+        dispatch({
+            type: "allUserSuccess",
+            payload: response.data.users,
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "allUserFailure",
+            payload: error.response.data.message,
+        })
+    }
 }
