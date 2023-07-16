@@ -40,3 +40,32 @@ export const updateLike = (id) => async (dispatch) => {
         })
     }
 };
+
+export const addPostComment = (id,comment) => async(dispatch) => {
+try {
+
+    dispatch({
+type: "commentRequest",
+    });
+
+    const response = await axios.put(`/post/comment/${id}`,{
+        comment
+    },{
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+
+    dispatch({
+        type: "commentSuccess",
+        payload: response.data.message,
+    })
+    
+} catch (error) {
+    dispatch({
+        type: "commentFailure",
+        payload: error.response.data.message,
+    });
+
+}
+};
