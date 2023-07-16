@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Dialog } from '@mui/material';
 import {
     MoreVert,
     Favorite,
@@ -10,7 +10,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import User from '../User/User';
-import { updateLike } from '../../Services/postService';
+import { addPostComment, getFollowingPost, updateLike } from '../../Services/postService';
+import CommentCard from '../comment/CommentCard';
 
 
 const Post = ({
@@ -28,16 +29,39 @@ const Post = ({
 }) => {
 
     const [like, setLike] = useState(false);
-    console.log(likes);
-// console.log(like);
+    const [liked, setLiked] = useState(false);
+    const [userComments, setUserComments] = useState("");
+    const [toggleComment, setToggleComment] = useState(false);
+    // console.log(likes);
+    // console.log(like);
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.user);
 
 
-    console.log(typeof(user._id), user._id);
-    const handleLike = () => {
+    // console.log(typeof (user._id), user._id);
+    const handleLike = async () => {
         setLike(!like);
-        dispatch(updateLike(postId));
+        await dispatch(updateLike(postId));
+
+        if (isUserAccount) {
+            console.log("my posts");
+        } else {
+            dispatch(getFollowingPost());
+        }
+    };
+
+    const addComment = async (event) => {
+        event.preventDefault();
+
+        await dispatch(addPostComment(postId, userComments));
+
+        if (isUserAccount) {
+            console.log("my posts");
+        } else {
+            dispatch(getFollowingPost());
+        }
+
+
     };
 
     useEffect(() => {
@@ -76,12 +100,12 @@ const Post = ({
                 <img src={postImage} alt='Post' />
             </div>
             <div className='like-comment'>
-                <button className='like-btn'>
-                    <Typography>5 likes</Typography>
+                <button className='like-btn'
+                    onClick={() => setLiked(!liked)}
+                    disabled={likes.length === 0 ? true : false}>
+                    <Typography>{likes.length} likes</Typography>
                 </button>
-                <button className='comment-btn'>
-                    <Typography>Comments</Typography>
-                </button>
+                <Typography className='comment-btn'>{userComments.length}Comments</Typography>
             </div>
             <div className='like-comment-delete'>
                 <button className='like-option' onClick={handleLike}>
@@ -89,7 +113,7 @@ const Post = ({
                         <FavoriteBorder />
                     }
                 </button>
-                <button className='comment-option'>
+                <button className='comment-option' onClick={() => setToggleComment(!toggleComment)}>
                     <ChatBubbleOutline />
                 </button>
 
@@ -98,6 +122,45 @@ const Post = ({
                 }
 
             </div>
+            <Dialog open={liked} onClose={() => setLiked(!liked)}>
+                <div className='dialog-box'>
+                    <Typography variant='h4'>Liked By</Typography>
+                    {
+                        likes?.map((user) =>
+                            <User
+                                key={user._id}
+                                userId={user._id}
+                                name={user.name}
+                                location={user.location}
+                                avatar={user.avatar.url}
+                            />
+                        )
+                    }
+                </div>
+            </Dialog>
+
+            <Dialog open={toggleComment} onClose={() => setToggleComment(!toggleComment)}>
+                <div className='dialog-box'>
+                    <Typography variant='h4'>Comments</Typography>
+                    <form className='comment-box' onSubmit={addComment}>
+                        <input type='text' placeholder='Add your comment' value={userComments} onChange={(event) => setUserComments(event.target.value)} required />
+                        <button type="submit" variant="contained">Add</button>
+                    </form>
+                    {
+                        comments.length > 0 ? comments.map((comment) => (
+                            <CommentCard
+                            userId = {comment.user._id}
+                            name = {comment.user.name}
+                            avatar = {comment.user.avatar.url}
+                            comment = {comment.comment}
+                            commentId = {comment._id}
+                            postId = {postId}
+                            isUserAccount = {isUserAccount}
+                            />
+                        )) : <Typography>No comments</Typography>
+                    }
+                </div>
+            </Dialog>
         </div>
     )
 }
