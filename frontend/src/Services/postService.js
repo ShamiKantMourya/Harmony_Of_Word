@@ -19,3 +19,24 @@ export const getFollowingPost = () => async(dispatch) => {
         })
     }
 };
+
+export const updateLike = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "likeRequest",
+        })
+
+        const response = await axios.get(`/post/${id}`);
+
+        dispatch({
+            type: "likeSuccess",
+            payload: response.data.message,
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "likeFailure",
+            payload: error.response.data.message,
+        })
+    }
+};
