@@ -1,7 +1,9 @@
 import { Typography } from '@mui/material';
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { getFollowingPost } from '../../Services/postService';
 
 const CommentCard = ({
     userId,
@@ -15,8 +17,17 @@ const CommentCard = ({
 
     const { user } = useSelector((state) => state.user);
 
-    const deleteComment = () => {
+    const dispatch = useDispatch();
 
+    const deleteComment = async () => {
+
+        await dispatch(deleteComment(postId, commentId));
+
+        if (isUserAccount) {
+            console.log("my posts");
+        } else {
+            dispatch(getFollowingPost());
+        }
     };
 
     return (
