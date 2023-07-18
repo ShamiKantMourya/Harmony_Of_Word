@@ -41,27 +41,82 @@ export const likeReducer = createReducer(initialState, {
     }
 });
 
-export const commentReducer = () => createReducer(initialState, {
+export const commentReducer = createReducer(initialState, {
 
-commentRequest: (state) => {
-    state.loading = true;
-},
+    commentRequest: (state) => {
+        state.loading = true;
+    },
 
-commentSuccess: (state, action) => {
-    state.loading = false;
-    state.message = action.payload;
-},
+    commentSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
 
-commentFailure: (state, action) => {
-    state.loading = false;
-    state.error = action.payload;
-},
+    commentFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
 
-clearErrors: (state) => {
-    state.error = null;
-},
+    deleteCommentRequest: (state) => {
+        state.loading = true;
+    },
 
-clearMessage: (state) => {
-    state.message = null;
-}
+    deleteCommentSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+
+    deleteCommentFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    clearErrors: (state) => {
+        state.error = null;
+    },
+
+    clearMessage: (state) => {
+        state.message = null;
+    }
 });
+
+export const myPostReducer = createReducer(initialState, {
+
+    myPostRequest: (state) => {
+        state.loading = true;
+    },
+
+    myPostSuccess: (state, action) => {
+        state.loading = false;
+        state.posts = action.payload;
+    },
+
+    myPostFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    clearErrors: (state) => {
+        state.error = null;
+    },
+}); 
+
+export const createPostReducer = createReducer(initialState, {
+    createPostRequest: (state) => {
+        state.loading = true;
+    },
+
+    createPostSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+
+    createPostFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    clearErrors: (state) => {
+        state.error = null;
+    },
+})
