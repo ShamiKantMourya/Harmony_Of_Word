@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getFollowingPost = () => async(dispatch) => {
+export const getFollowingPost = () => async (dispatch) => {
     try {
         dispatch({
             type: "postOfFollowingRequest",
@@ -11,7 +11,7 @@ export const getFollowingPost = () => async(dispatch) => {
             type: "postOfFollowingSuccess",
             payload: response.data.posts,
         });
-        
+
     } catch (error) {
         dispatch({
             type: "postOfFollowingFailure",
@@ -41,31 +41,101 @@ export const updateLike = (id) => async (dispatch) => {
     }
 };
 
-export const addPostComment = (id,comment) => async(dispatch) => {
-try {
+export const addPostComment = (id, comment) => async (dispatch) => {
+    try {
 
+        dispatch({
+            type: "commentRequest",
+        });
+
+        const response = await axios.put(`/post/comment/${id}`, {
+            comment
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        dispatch({
+            type: "commentSuccess",
+            payload: response.data.message,
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "commentFailure",
+            payload: error.response.data.message,
+        });
+
+    }
+};
+
+export const deleteComment = (id, commentId) => async (dispatch) => {
+    try {
+
+        dispatch({
+            type: "deleteCommentRequest"
+        });
+
+        const response = await axios.delete(`/post/comment/${id}`, {
+            data: commentId,
+        });
+
+        dispatch({
+            type: "deleteCommentSuccess",
+            payload: response.data.message,
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "deleteCommentFailure",
+            payload: error.response.data.message,
+        })
+    }
+};
+
+export const userPosts = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: "myPostRequest",
+        });
+
+        const response = await axios.get("/post/my/posts");
+
+        dispatch({
+            type: "myPostSuccess",
+            payload: response.data.posts,
+        })
+    } catch (error) {
+        dispatch({
+            type: "myPostFailure",
+            payload: error.response.data.message,
+        })
+    }
+};
+
+export const createPost = (caption, image, location) => async(dispatch) => {
+try {
     dispatch({
-type: "commentRequest",
+        type: "createPostRequest",
     });
 
-    const response = await axios.put(`/post/comment/${id}`,{
-        comment
+    const response = await axios.post("/post/createpost",{
+        caption,image,location
     },{
-        headers: {
+        headers:  {
             "Content-Type": "application/json",
         }
     });
 
     dispatch({
-        type: "commentSuccess",
+        type: 'createPostSuccess',
         payload: response.data.message,
     })
-    
 } catch (error) {
     dispatch({
-        type: "commentFailure",
+        type: "createPostFailure",
         payload: error.response.data.message,
-    });
-
+    })
 }
 };
