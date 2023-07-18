@@ -77,11 +77,11 @@ exports.updatePassword = async (req, res) => {
 };
 
 
-exports.myProfile = async(req, res) => {
+exports.myProfile = async (req, res) => {
 
     try {
-        
-        const user = await User.findById(req.user._id).populate("posts");
+
+        const user = await User.findById(req.user._id).populate("posts followers following");
 
         await user.save();
 
@@ -99,10 +99,10 @@ exports.myProfile = async(req, res) => {
 
 //Delete Profile
 
-exports.deleteProfile = async(req,res) => {
+exports.deleteProfile = async (req, res) => {
 
     try {
-        
+
         const user = await User.findById(req.user._id);
         const posts = user.posts;
         const followers = user.followers;
@@ -111,23 +111,23 @@ exports.deleteProfile = async(req,res) => {
 
         await user.remove();
 
-        res.cookie("token", null ,{expires: new Date(Date.now()), httpOnly: true});
+        res.cookie("token", null, { expires: new Date(Date.now()), httpOnly: true });
 
         for (let i = 0; i < posts.length; i++) {
             const post = await Post.findById(posts[i]);
             await post.remove();
         };
 
-            // Removing User from followers following
+        // Removing User from followers following
 
         for (let i = 0; i < followers.length; i++) {
             const follower = await User.findById(followers[i]);
 
             const index = follower.following.indexOf(userId)
 
-            follower.following.splice(index,1);
+            follower.following.splice(index, 1);
             await follower.save();
-            
+
         }
 
         //Removing Users from following's follower
@@ -137,9 +137,9 @@ exports.deleteProfile = async(req,res) => {
 
             const index = userFollow.followers.indexOf(userId)
 
-            userFollow.followers.splice(index,1);
+            userFollow.followers.splice(index, 1);
             await userFollow.save();
-            
+
         }
 
         res.status(200).json({
@@ -154,12 +154,12 @@ exports.deleteProfile = async(req,res) => {
     }
 };
 
-exports.getUserProfile = async(req,res) => {
+exports.getUserProfile = async (req, res) => {
 
     try {
-        const user = await User.findById(req.params.id).populate("posts");
+        const user = await User.findById(req.params.id).populate("posts followers following");
 
-        if(!user){
+        if (!user) {
             res.status(404).json({
                 success: false,
                 message: "User not found",
@@ -178,11 +178,11 @@ exports.getUserProfile = async(req,res) => {
     }
 };
 
-exports.getAllUserData = async(req, res) => {
+exports.getAllUserData = async (req, res) => {
 
     try {
         const users = await User.find({});
-         
+
         res.status(200).json({
             success: true,
             users,
@@ -195,11 +195,11 @@ exports.getAllUserData = async(req, res) => {
     }
 };
 
-exports.forgetPassword = async(req,res) => {
+exports.forgetPassword = async (req, res) => {
     try {
-        const user = await User.findOne({email: req.body.email});
+        const user = await User.findOne({ email: req.body.email });
 
-        if(!user){
+        if (!user) {
             res.status(404).json({
                 success: false,
                 message: "User not found",
@@ -244,16 +244,16 @@ exports.forgetPassword = async(req,res) => {
     }
 };
 
-exports.resetPassword = async(req, res) => {
+exports.resetPassword = async (req, res) => {
     try {
         const resetToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
 
         const user = await User.findOne({
             resetToken,
-            resetPasswordTokenExpire: {$gt: Date.now()},
+            resetPasswordTokenExpire: { $gt: Date.now() },
         });
 
-        if(!user){
+        if (!user) {
             return res.status(401).json({
                 success: false,
                 message: "Invalid Token or has expired",
@@ -266,7 +266,7 @@ exports.resetPassword = async(req, res) => {
 
         await user.save();
 
-         res.status(200).json({
+        res.status(200).json({
             success: true,
             message: "Password Updated successfully",
         })
@@ -276,5 +276,30 @@ exports.resetPassword = async(req, res) => {
             message: error.message,
         })
     }
-}
+};
+
+exports.getMyPosts = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+
+        const posts = [];
+
+        for (let i = 0; i < user.posts.length; i++) {
+            const post = await Post.findById(user.posts[i]).populate("owner likes comments.user");
+            posts.push(post);
+
+        };
+
+        res.status(200).json({
+            success: true,
+            posts,
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+};
 
