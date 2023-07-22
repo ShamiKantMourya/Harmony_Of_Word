@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const loginUser = (email, password) => async(dispatch) => {
     try {
         dispatch({
@@ -85,4 +86,30 @@ export const getAllUsers = () => async(dispatch) =>{
             payload: error.response.data.message,
         })
     }
+};
+
+export const registerUser = (avatar, name, location, email, password) => async (dispatch) => {
+try {
+    dispatch({
+        type: "registerRequest",
+    });
+
+    const response = await axios.post('user/register',{
+        avatar, name, location, email, password
+    }, {
+        headers:{
+            "Content-Type": "application/json"
+        },
+    });
+    dispatch({
+        type: "registerSuccess",
+        payload: response.data.user,
+    })
+    
+} catch (error) {
+    dispatch({
+        type: "registerFailure",
+        payload: error.response.data.message,
+    })
+}
 };
