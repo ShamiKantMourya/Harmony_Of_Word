@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { allUserReducer, userReducer } from "./Reducers/userReducer";
+import { allUserReducer, updateProfileReducer, userReducer } from "./Reducers/userReducer";
 import {
     commentReducer,
     createPostReducer,
@@ -17,6 +17,7 @@ const store = configureStore({
         comment: commentReducer,
         myPost: myPostReducer,
         createPost: createPostReducer,
+        updateProfile: updateProfileReducer,
     }
 });
 
