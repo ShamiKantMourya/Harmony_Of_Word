@@ -10,7 +10,15 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import User from '../User/User';
-import { addPostComment, getFollowingPost, updateLike } from '../../Services/postService';
+import { 
+    addPostComment, 
+    getFollowingPost, 
+    updateCaption, 
+    updateLike, 
+    userPosts, 
+    deleteUserPost,
+} from '../../Services/postService';
+import {loadUser} from "../../Services/userService";
 import CommentCard from '../comment/CommentCard';
 
 
@@ -32,8 +40,9 @@ const Post = ({
     const [liked, setLiked] = useState(false);
     const [userComments, setUserComments] = useState("");
     const [toggleComment, setToggleComment] = useState(false);
-    // console.log(likes);
-    // console.log(like);
+    const [captionValue, setCaptionValue] = useState(caption);
+    const [toggleCaption, setToggleCaption] = useState(false);
+
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.user);
 
@@ -44,7 +53,7 @@ const Post = ({
         await dispatch(updateLike(postId));
 
         if (isUserAccount) {
-            console.log("my posts");
+            dispatch(userPosts());
         } else {
             dispatch(getFollowingPost());
         }
@@ -56,13 +65,25 @@ const Post = ({
         await dispatch(addPostComment(postId, userComments));
 
         if (isUserAccount) {
-            console.log("my posts");
+            dispatch(userPosts());
         } else {
             dispatch(getFollowingPost());
         }
 
 
     };
+
+    const updateCaptionHandler = (event) =>{
+        event.preventDefault();
+        dispatch(updateCaption(captionValue, postId));
+        dispatch(userPosts());
+    };
+
+        const deletePostHandler = async () => {
+           await dispatch(deleteUserPost(postId));
+            dispatch(userPosts());
+            dispatch(loadUser());
+        }
 
     useEffect(() => {
         likes.forEach(item => {
@@ -86,7 +107,8 @@ const Post = ({
                 </div>
                 <div className='edit-option'>
                     {
-                        isUserAccount ? <button>
+                        isUserAccount ? 
+                        <button onClick={()=> setToggleCaption(!toggleCaption)}>
                             <MoreVert />
                         </button> : null
                     }
@@ -105,7 +127,7 @@ const Post = ({
                     disabled={likes.length === 0 ? true : false}>
                     <Typography>{likes.length} likes</Typography>
                 </button>
-                <Typography className='comment-btn'>{userComments.length}Comments</Typography>
+                <Typography className='comment-btn'>{comments.length}Comments</Typography>
             </div>
             <div className='like-comment-delete'>
                 <button className='like-option' onClick={handleLike}>
@@ -118,7 +140,7 @@ const Post = ({
                 </button>
 
                 {
-                    isDelete ? <button className='delete-option'> <DeleteOutline /> </button> : null
+                    isDelete ? <button className='delete-option' onClick={deletePostHandler}> <DeleteOutline /> </button> : null
                 }
 
             </div>
@@ -149,6 +171,7 @@ const Post = ({
                     {
                         comments.length > 0 ? comments.map((comment) => (
                             <CommentCard
+                            key={comment._id}
                             userId = {comment.user._id}
                             name = {comment.user.name}
                             avatar = {comment.user.avatar.url}
@@ -159,6 +182,17 @@ const Post = ({
                             />
                         )) : <Typography>No comments</Typography>
                     }
+                </div>
+            </Dialog>
+
+
+            <Dialog open={toggleCaption} onClose={() => setToggleCaption(!toggleCaption)}>
+                <div className='dialog-box'>
+                    <Typography variant='h4'>Update Caption</Typography>
+                    <form className='comment-box' onSubmit={updateCaptionHandler}>
+                        <input type='text' placeholder='Caption....' value={captionValue} onChange={(event) => setCaptionValue(event.target.value)} required />
+                        <button type="submit" variant="contained">Update</button>
+                    </form>
                 </div>
             </Dialog>
         </div>
