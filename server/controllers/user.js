@@ -1,20 +1,26 @@
+const cloudinary = require("cloudinary").v2;
+
 const User = require("../models/User");
 
 exports.registerUser = async (req, res) => {
     try {
-        const { name, email, password, location } = req.body;
+        const { avatar, name, location, email, password } = req.body;
         let user = await User.findOne({ email });
         if (user) return res.status(400).json(
             {
                 success: false,
                 message: "User already exists",
             });
+
+            const myCloud = await cloudinary.uploader.upload(avatar, {
+                folder: "avatar",
+            });
         user = await User.create({
-            name, email, password, location,
+            name,location, email, password,
             avatar: {
-                public_id: "sample_id",
-                url: "sample_url"
-            }
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            },
         });
 
         // res.status(201).json({ success: true, user });

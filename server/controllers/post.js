@@ -1,16 +1,16 @@
-const cloudinary = require("cloudinary");
+const cloudinary = require('cloudinary').v2;
 
 const Post = require("../models/Post");
 const User = require("../models/User");
 
 exports.createPost = async (req, res) => {
     try {
-const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
-
-    folder: "Post",
-});
+        const myCloud = await cloudinary.uploader.upload(req.body.image, {
+            folder: "post"
+        });
         const newPostData = {
             caption: req.body.caption,
+            location: req.body.location,
             image: {
                 public_id: myCloud.public_id,
                 url: myCloud.secure_url,
@@ -22,13 +22,13 @@ const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
         const user = await User.findById(req.user._id);
         // console.log(user);
 
-        user.posts.push(newPost._id);
+        user.posts.unshift(newPost._id);
 
         await user.save();
 
         res.status(201).json({
             success: true,
-            post: newPost,
+            message: "Post created",
         });
     } catch (error) {
         res.status(500).json({
@@ -56,6 +56,8 @@ exports.deletePost = async (req, res) => {
             });
         }
 
+        await cloudinary.uploader.destroy(post.image.public_id);
+        
         await post.remove();
 
 
@@ -128,7 +130,7 @@ exports.getFollowingPost = async (req, res) => {
                 $in: user.following,
             }
         }).populate("owner likes comments.user")
-// console.log(posts);
+        // console.log(posts);
         res.status(200).json({
             success: true,
             posts: posts.reverse(),
@@ -240,7 +242,7 @@ exports.deleteComment = async (req, res) => {
         }
 
         if (post.owner.toString() === req.user._id.toString()) {
-            if(req.body.commentId === undefined){
+            if (req.body.commentId === undefined) {
                 return res.status(400).json({
                     success: false,
                     message: "Cannot find post with this id",
