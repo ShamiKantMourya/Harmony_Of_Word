@@ -5,7 +5,7 @@ import { useAlert } from 'react-alert';
 
 import "./userAccount.css";
 import { userPosts } from '../../Services/postService';
-import { logoutUser } from '../../Services/userService';
+import { deleteUserProfile, logoutUser } from '../../Services/userService';
 import User from '../User/User';
 import Post from '../Post/Post';
 import Loader from "../Loader/Loader";
@@ -18,18 +18,25 @@ const UserAccount = () => {
 
     const { loading, error, posts } = useSelector((state) => state.myPost);
     const { user, loading: userLoading } = useSelector((state) => state.user);
+    const {loading: deleteProfileLoading } = useSelector((state) => state.updateProfile);
 
     const [followerToggle, setFollowerToggle] = useState(false);
     const [followingToggle, setFollowingToggle] = useState(false);
 
-    const logoutHandler = async() => {
+    const logoutHandler = async () => {
         await dispatch(logoutUser());
         alert.success("Logout successfully")
-    }
+    };
+
+    const deleteprofile = async () => {
+        await dispatch(deleteUserProfile());
+        dispatch(logoutUser());
+    };
 
     useEffect(() => {
         dispatch(userPosts());
-    }, [dispatch]);
+       
+    }, [dispatch])
 
     return loading === true || userLoading === true ? (
         <Loader />
@@ -49,8 +56,8 @@ const UserAccount = () => {
                             ownerImage={post.owner.avatar.url}
                             ownerName={post.owner.name}
                             ownerId={post.owner._id}
-                            isUserAccount = {true}
-                            isDelete = {true}
+                            isUserAccount={true}
+                            isDelete={true}
                         />
                     )) : <Typography>No Posts</Typography>
                 }
@@ -83,7 +90,12 @@ const UserAccount = () => {
                         <Link to="/update/password">Change password</Link>
                     </div>
 
-                    <Button variant='text' style={{ color: "red", margin: "2vmax" }}>Delete My Profile</Button>
+                    <Button variant='text' 
+                    onClick={deleteprofile} 
+                    disabled = {deleteProfileLoading}
+                    style={{ color: "red", margin: "2vmax" }}>
+                        Delete My Profile
+                        </Button>
                 </div>
                 <Dialog open={followerToggle} onClose={() => setFollowerToggle(!followerToggle)}>
                     <div className='dialog-box'>
