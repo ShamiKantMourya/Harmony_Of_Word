@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const cloudinary = require("cloudinary").v2;
 
 const User = require("../models/User");
 const Post = require("../models/Post");
@@ -10,16 +11,27 @@ const { sendMail } = require("../middlewares/sendMail");
 exports.updateProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
-        const { name, email } = req.body;
+        const { name, location, email, avatar } = req.body;
         if (name) {
             user.name = name;
         }
         if (email) {
             user.email = email;
         }
+        if (location) {
+            user.location = location;
+        }
 
         //Avatar
+        if (avatar) {
 
+            await cloudinary.uploader.destroy(user.avatar.public_id);
+            const myCloud = await cloudinary.uploader.upload(avatar, {
+                folder: "avatar",
+            })
+            user.avatar.public_id = myCloud.public_id;
+            user.avatar.url = myCloud.secure_url;
+        }
 
         await user.save();
 
@@ -109,12 +121,15 @@ exports.deleteProfile = async (req, res) => {
         const following = user.following;
         const userId = user._id;
 
+        await cloudinary.uploader.destroy(user.avatar.public_id);
+
         await user.remove();
 
         res.cookie("token", null, { expires: new Date(Date.now()), httpOnly: true });
 
         for (let i = 0; i < posts.length; i++) {
             const post = await Post.findById(posts[i]);
+            await cloudinary.uploader.destroy(post.image.public_id);
             await post.remove();
         };
 
