@@ -114,14 +114,16 @@ export const userPosts = () => async (dispatch) => {
     }
 };
 
-export const createPost = (caption, image, location) => async(dispatch) => {
+export const createPost = (caption,image,location) => async(dispatch) => {
 try {
     dispatch({
         type: "createPostRequest",
     });
 
     const response = await axios.post("/post/createpost",{
-        caption,image,location
+        caption,
+        image,
+        location,
     },{
         headers:  {
             "Content-Type": "application/json",
@@ -139,3 +141,49 @@ try {
     })
 }
 };
+
+export const updateCaption = (caption, id) => async(dispatch) => {
+try {
+    dispatch({
+        type: "updateCaptionRequest",
+    })
+
+    const response = await axios.put(`/post/${id}`, {
+        caption
+    },{
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+
+    dispatch({
+        type: "updateCaptionSuccess",
+        payload: response.data.message,
+    });
+
+} catch (error) {
+    dispatch({
+        type: "updateCaptionFailure",
+        payload: error.response.data.message,
+    })
+}
+};
+
+export const deleteUserPost = (id) => async(dispatch) => {
+    try {
+        dispatch({
+            type: "deletePostRequest",
+        });
+
+        const response = await axios.delete(`/post/${id}`);
+        dispatch({
+            type: "deletePostSuccess",
+            payload: response.data.message,
+        })
+    } catch (error) {
+        dispatch({
+            type: "deletePostFailure",
+            payload: error.response.data.message,
+        })
+    }
+}
