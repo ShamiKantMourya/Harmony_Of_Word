@@ -6,17 +6,20 @@ import { Avatar, Typography } from '@mui/material';
 
 const User = ({ userId, name, location, avatar }) => {
     return (
-        <Link to={`/user/${userId}`} className='user-card'>
-            <div className='user-box'>
-                <div className='user-img'>
-                    <Avatar src={avatar} alt= {name} />
+        <div className='userProfile'>
+            <Link to={`/user/${userId}`} className='user-card'>
+                <div className='user-box'>
+                    <div className='user-img'>
+                        <Avatar src={avatar} alt={name} sx={{ height: "4vmax", width: "4vmax" }}/>
+                    </div>
+                    <div className='name-loc'>
+                        <p className='name'>{name}</p>
+                        <p className='loc'>{location}</p>
+                    </div>
                 </div>
-                <div className='name-loc'>
-                    <Typography className='loc'>{location}</Typography>
-                    <Typography className='name'>{name}</Typography>
-                </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
+
     )
 }
 
