@@ -61,7 +61,7 @@ const HomePage = () => {
               likes={posts.likes}
               comments={posts.comments}
               ownerImage={posts.owner.avatar.url}
-              ownerName={posts.name}
+              ownerName={posts.owner.name}
               ownerId={posts.owner._id}
             />
           )) : <Typography variant="h6">No posts Available</Typography>
