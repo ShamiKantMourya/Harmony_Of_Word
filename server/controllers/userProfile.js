@@ -154,7 +154,33 @@ exports.deleteProfile = async (req, res) => {
 
             userFollow.followers.splice(index, 1);
             await userFollow.save();
+        }
 
+        // removing all comments of the user from all posts
+
+        const allPosts = await Post.find();
+
+        for (let i = 0; i < allPosts.length; i++) {
+            const post = await Post.findById(allPosts[i]._id);
+
+            for (let j = 0; j < post.comments.length; j++) {
+                if (post.comments[j].user === userId) {
+                    post.comments.splice(j, 1);
+                }
+            }
+            await post.save();
+        }
+        // removing all likes of the user from all posts
+
+        for (let i = 0; i < allPosts.length; i++) {
+            const post = await Post.findById(allPosts[i]._id);
+
+            for (let j = 0; j < post.likes.length; j++) {
+                if (post.likes[j] === userId) {
+                    post.likes.splice(j, 1);
+                }
+            }
+            await post.save();
         }
 
         res.status(200).json({
@@ -196,7 +222,9 @@ exports.getUserProfile = async (req, res) => {
 exports.getAllUserData = async (req, res) => {
 
     try {
-        const users = await User.find({});
+        const users = await User.find({
+            name: {$regex: req.query.name, $options: 'i'},
+        });
 
         res.status(200).json({
             success: true,
@@ -225,7 +253,7 @@ exports.forgetPassword = async (req, res) => {
 
         await user.save();
 
-        const resetURL = `${req.protocol}://${req.get("host")}/user/password/reset/${resetPasswordToken}`;
+        const resetURL = `${req.protocol}://${req.get("host")}/password/reset/${resetPasswordToken}`;
 
         const resetPasswordUrlMessage = `Reset your password by clicking on the below link : \n\n ${resetURL}`;
 
