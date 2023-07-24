@@ -18,10 +18,12 @@ const UserAccount = () => {
 
     const { loading, error, posts } = useSelector((state) => state.myPost);
     const { user, loading: userLoading } = useSelector((state) => state.user);
-    const {loading: deleteProfileLoading } = useSelector((state) => state.updateProfile);
+    const { loading: deleteProfileLoading } = useSelector((state) => state.updateProfile);
 
     const [followerToggle, setFollowerToggle] = useState(false);
     const [followingToggle, setFollowingToggle] = useState(false);
+
+    console.log(posts);
 
     const logoutHandler = async () => {
         await dispatch(logoutUser());
@@ -35,7 +37,7 @@ const UserAccount = () => {
 
     useEffect(() => {
         dispatch(userPosts());
-       
+
     }, [dispatch])
 
     return loading === true || userLoading === true ? (
@@ -64,38 +66,47 @@ const UserAccount = () => {
             </div>
             <div className='user-profile-section'>
                 <div className='user-profile-container'>
-                    <Avatar src={user.avatar.url}
-                        sx={{ height: "8vmax", width: "8vmax" }}
-                    />
-                    <Typography>{user.name}</Typography>
-                    <Link to="/update/profile">Edit profile</Link>
-                    <div className='user-followers'>
-                        <button onClick={() => setFollowerToggle(!followerToggle)}>
-                            followers
-                        </button>
-                        <Typography>{user.followers.length}</Typography>
+                    <div className='user-profile-avatar'>
+                        <Avatar src={user.avatar.url}
+                            sx={{ height: "8vmax", width: "8vmax" }}
+                        />
                     </div>
-                    <div className='user-following'>
-                        <button onClick={() => setFollowingToggle(!followingToggle)}>
-                            following
-                        </button>
-                        <Typography>{user.following.length}</Typography>
-                    </div>
-                    <div className='user-post'>
-                        <Typography> Post</Typography>
-                        <Typography>{user.posts.length}</Typography>
-                    </div>
-                    <Button className='logout-btn' onClick={logoutHandler}>Logout</Button>
-                    <div className='user-change-password'>
-                        <Link to="/update/password">Change password</Link>
+                    <p className='user-Profile-name'>{user.name}</p>
+                    <Link to="/update/profile" className='user-Profile-editLink' >Edit profile</Link>
+                    <div className='followunFollow'>
+                        <div className='user-followers'>
+                            <button className='user-profile-follow' onClick={() => setFollowerToggle(!followerToggle)}>
+                                followers
+                            </button>
+                            <Typography>{user.followers.length}</Typography>
+                        </div>
+                        <div className='user-followers'>
+                            <button className='user-profile-follow' onClick={() => setFollowingToggle(!followingToggle)}>
+                                following
+                            </button>
+                            <Typography>{user.following.length}</Typography>
+                        </div>
                     </div>
 
-                    <Button variant='text' 
-                    onClick={deleteprofile} 
-                    disabled = {deleteProfileLoading}
-                    style={{ color: "red", margin: "2vmax" }}>
-                        Delete My Profile
+                    <div className='user-post'>
+                        <Typography > Post</Typography>
+                        <Typography sx={{ marginLeft: "15px" }}>{user.posts.length}</Typography>
+                    </div>
+                    <div className='logout-btn'>
+                        <button onClick={logoutHandler}>Logout</button>
+                    </div>
+                    <div className='user-change-password'>
+                        <Link to="/update/password" className='change-password-text'>Change password</Link>
+                    </div>
+                    <div className='delete-my-profile'>
+                        <Button variant='text'
+                            onClick={deleteprofile}
+                            disabled={deleteProfileLoading}
+                            style={{ color: "red", margin: "2vmax" }}>
+                            Delete My Profile
                         </Button>
+                    </div>
+
                 </div>
                 <Dialog open={followerToggle} onClose={() => setFollowerToggle(!followerToggle)}>
                     <div className='dialog-box'>
