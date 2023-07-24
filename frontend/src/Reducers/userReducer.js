@@ -130,6 +130,34 @@ export const updateProfileReducer = createReducer(initialState,{
         state.error = action.payload;
     },
 
+    forgetPasswordRequest: (state) => {
+        state.loading = true;
+    },
+
+    forgetPasswordSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+
+    forgetPasswordFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    resetPasswordRequest: (state) => {
+        state.loading = true;
+    },
+
+    resetPasswordSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+
+    resetPasswordFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
     clearErrors: (state) => {
         state.error = null;
     },
@@ -137,4 +165,53 @@ export const updateProfileReducer = createReducer(initialState,{
     clearMessage: (state) => {
         state.message = null;
     }
-})
+});
+
+export const userProfileReducer = createReducer(initialState,{
+    userProfileRequest: (state) => {
+        state.loading = true;
+    },
+
+    userProfileSuccess: (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+    },
+
+    userProfileFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    clearErrors: (state) => {
+        state.error = null;
+    },
+
+    clearMessage: (state) => {
+        state.message = null;
+    }
+});
+
+export const followUserReducer = createReducer(initialState,{
+
+    followUserRequest: (state) => {
+        state.loading = true;
+    },
+
+    followUserSuccess: (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+    },
+
+    followUserFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    clearErrors: (state) => {
+        state.error = null;
+    },
+
+    clearMessage: (state) => {
+        state.message = null;
+    }
+});
