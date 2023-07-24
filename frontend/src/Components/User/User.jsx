@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 import "./User.css";
-import { Avatar, Typography } from '@mui/material';
+import { Avatar } from '@mui/material';
 
 const User = ({ userId, name, location, avatar }) => {
     return (
@@ -10,7 +10,7 @@ const User = ({ userId, name, location, avatar }) => {
             <Link to={`/user/${userId}`} className='user-card'>
                 <div className='user-box'>
                     <div className='user-img'>
-                        <Avatar src={avatar} alt={name} sx={{ height: "4vmax", width: "4vmax" }}/>
+                        <Avatar src={avatar} alt={name} sx={{ height: "3.5vmax", width: "3.5vmax" }}/>
                     </div>
                     <div className='name-loc'>
                         <p className='name'>{name}</p>
