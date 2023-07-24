@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { getFollowingPost } from '../../Services/postService';
+import { userPosts } from '../../Services/postService';
 
 const CommentCard = ({
     userId,
@@ -24,7 +25,7 @@ const CommentCard = ({
         await dispatch(deleteComment(postId, commentId));
 
         if (isUserAccount) {
-            console.log("my posts");
+           dispatch(userPosts());
         } else {
             dispatch(getFollowingPost());
         }
