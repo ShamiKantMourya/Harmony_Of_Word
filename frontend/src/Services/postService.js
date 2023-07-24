@@ -6,7 +6,7 @@ export const getFollowingPost = () => async (dispatch) => {
             type: "postOfFollowingRequest",
         });
 
-        const response = await axios.get("/post//followingPosts");
+        const response = await axios.get("/api/v1/followingPosts");
         dispatch({
             type: "postOfFollowingSuccess",
             payload: response.data.posts,
@@ -26,7 +26,7 @@ export const updateLike = (id) => async (dispatch) => {
             type: "likeRequest",
         })
 
-        const response = await axios.get(`/post/${id}`);
+        const response = await axios.get(`/api/v1/post/${id}`);
 
         dispatch({
             type: "likeSuccess",
@@ -48,7 +48,7 @@ export const addPostComment = (id, comment) => async (dispatch) => {
             type: "commentRequest",
         });
 
-        const response = await axios.put(`/post/comment/${id}`, {
+        const response = await axios.put(`/api/v1/post/comment/${id}`, {
             comment
         }, {
             headers: {
@@ -77,8 +77,8 @@ export const deleteComment = (id, commentId) => async (dispatch) => {
             type: "deleteCommentRequest"
         });
 
-        const response = await axios.delete(`/post/comment/${id}`, {
-            data: commentId,
+        const response = await axios.delete(`/api/v1/post/comment/${id}`, {
+            data: {commentId},
         });
 
         dispatch({
@@ -100,7 +100,9 @@ export const userPosts = () => async (dispatch) => {
             type: "myPostRequest",
         });
 
-        const response = await axios.get("/post/my/posts");
+        const response = await axios.get("/api/v1/my/posts");
+
+        console.log(response.data);
 
         dispatch({
             type: "myPostSuccess",
@@ -114,68 +116,68 @@ export const userPosts = () => async (dispatch) => {
     }
 };
 
-export const createPost = (caption,image,location) => async(dispatch) => {
-try {
-    dispatch({
-        type: "createPostRequest",
-    });
+export const createPost = (caption, image, location) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "createPostRequest",
+        });
 
-    const response = await axios.post("/post/createpost",{
-        caption,
-        image,
-        location,
-    },{
-        headers:  {
-            "Content-Type": "application/json",
-        }
-    });
+        const response = await axios.post("/api/v1/post/createpost", {
+            caption,
+            image,
+            location,
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
 
-    dispatch({
-        type: 'createPostSuccess',
-        payload: response.data.message,
-    })
-} catch (error) {
-    dispatch({
-        type: "createPostFailure",
-        payload: error.response.data.message,
-    })
-}
+        dispatch({
+            type: 'createPostSuccess',
+            payload: response.data.message,
+        })
+    } catch (error) {
+        dispatch({
+            type: "createPostFailure",
+            payload: error.response.data.message,
+        })
+    }
 };
 
-export const updateCaption = (caption, id) => async(dispatch) => {
-try {
-    dispatch({
-        type: "updateCaptionRequest",
-    })
+export const updateCaption = (caption, id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "updateCaptionRequest",
+        })
 
-    const response = await axios.put(`/post/${id}`, {
-        caption
-    },{
-        headers: {
-            "Content-Type": "application/json",
-        }
-    });
+        const response = await axios.put(`/api/v1/post/${id}`, {
+            caption
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
 
-    dispatch({
-        type: "updateCaptionSuccess",
-        payload: response.data.message,
-    });
+        dispatch({
+            type: "updateCaptionSuccess",
+            payload: response.data.message,
+        });
 
-} catch (error) {
-    dispatch({
-        type: "updateCaptionFailure",
-        payload: error.response.data.message,
-    })
-}
+    } catch (error) {
+        dispatch({
+            type: "updateCaptionFailure",
+            payload: error.response.data.message,
+        })
+    }
 };
 
-export const deleteUserPost = (id) => async(dispatch) => {
+export const deleteUserPost = (id) => async (dispatch) => {
     try {
         dispatch({
             type: "deletePostRequest",
         });
 
-        const response = await axios.delete(`/post/${id}`);
+        const response = await axios.delete(`/api/v1/post/${id}`);
         dispatch({
             type: "deletePostSuccess",
             payload: response.data.message,
@@ -186,4 +188,25 @@ export const deleteUserPost = (id) => async(dispatch) => {
             payload: error.response.data.message,
         })
     }
-}
+};
+
+export const getUserPosts = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "userPostRequest",
+        });
+
+        const response = await axios.get(`/api/v1/post/userPost/${id}`);
+        console.log(response.data, "getuserPosts")
+        dispatch({
+            type: "userPostSuccess",
+            payload: response.data.posts,
+        })
+
+    } catch (error) {
+        dispatch({
+            type: "userPostFailure",
+            payload: error.response.data.message,
+        })
+    }
+};
