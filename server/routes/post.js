@@ -7,7 +7,8 @@ const {
     getFollowingPost,
     updateCaption,
     makeComments,
-    deleteComment
+    deleteComment,
+    getUserPost
 } = require("../controllers/post");
 
 const {getMyPosts} = require("../controllers/userProfile")
@@ -20,16 +21,16 @@ router.route("/followingPosts").get(isAuthenticated, getFollowingPost);
 
 router.route("/my/posts").get(isAuthenticated, getMyPosts);
 
-router.route("/createpost").post(isAuthenticated, createPost);
+router.route("/post/userPost/:id").get(isAuthenticated, getUserPost); //change in route
+
+router.route("/post/createpost").post(isAuthenticated, createPost);
 
 
-router.route("/:id").get(isAuthenticated, likeUnlikePost).put(isAuthenticated, updateCaption).delete(isAuthenticated, deletePost);
-
-
+router.route("/post/:id").get(isAuthenticated, likeUnlikePost).put(isAuthenticated, updateCaption).delete(isAuthenticated, deletePost); //change in route
 
 
 //Update, Add, Delete comment
 
-router.route("/comment/:id").put(isAuthenticated, makeComments).delete(isAuthenticated, deleteComment);
+router.route("/post/comment/:id").put(isAuthenticated, makeComments).delete(isAuthenticated, deleteComment); //change in route
 
 module.exports = router;

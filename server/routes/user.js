@@ -24,22 +24,22 @@ router.route("/logout").get(logoutUser);
 router.route("/follow/:id").get(isAuthenticated, followUser);
 
 //User Profile Routes
-// router.route("/allProfile").get(isAuthenticated, getAllUserData);
+
 
 router.route("/update/password").put(isAuthenticated, updatePassword);
 
 router.route("/update/profile").put(isAuthenticated, updateProfile);
 
-router.route("/myProfile").get(isAuthenticated, myProfile);
+router.route("/user/:id").get(isAuthenticated, getUserProfile); //change in route
 
-router.route("/:id").get(isAuthenticated, getUserProfile);
+router.route("/profile/myProfile").get(isAuthenticated, myProfile);
 
 router.route("/all/usersProfile").get(isAuthenticated, getAllUserData);
 
 router.route("/delete/profile").delete(isAuthenticated, deleteProfile);
 
 // Forget Password
-router.route("/forgetpassword").post(forgetPassword);
+router.route("/forget/password").post(forgetPassword);
 
 router.route("/password/reset/:token").put(resetPassword);
 

@@ -18,8 +18,8 @@ const post = require("./routes/post");
 const user = require("./routes/user");
 
 //routes to use
-app.use("/post", post);
-app.use("/user", user);
+app.use("/api/v1", post);
+app.use("/api/v1", user);
 
 
 module.exports = app;
