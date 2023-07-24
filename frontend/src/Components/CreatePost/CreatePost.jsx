@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Typography } from "@mui/material";
-import {useDispatch, useSelector} from "react-redux";
-import {useAlert} from "react-alert";
+import { Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
 
 import "./createPost.css";
 import { createPost } from '../../Services/postService';
@@ -13,7 +13,7 @@ const CreatePost = () => {
     const [caption, setCaption] = useState("");
     const [location, setLocation] = useState("");
 
-    const {loading, error, message} = useSelector((state) => state.createPost);
+    const { loading, error, message } = useSelector((state) => state.createPost);
     const dispatch = useDispatch();
     const alert = useAlert();
 
@@ -24,7 +24,7 @@ const CreatePost = () => {
         Reader.readAsDataURL(file);
 
         Reader.onload = () => {
-            if(Reader.readyState === 2) {
+            if (Reader.readyState === 2) {
                 setImage(Reader.result);
             }
         }
@@ -33,34 +33,38 @@ const CreatePost = () => {
 
     const postSubmitHandler = async (event) => {
         event.preventDefault();
-      await  dispatch(createPost(caption,image,location));
+        await dispatch(createPost(caption, image, location));
         dispatch(loadUser());
     };
 
     useEffect(() => {
-        if(error){
+        if (error) {
             alert.error(error);
-            dispatch({type:"clearErrors"});
+            dispatch({ type: "clearErrors" });
         }
 
-        if(message) {
+        if (message) {
             alert.success(message);
-            dispatch({type:"clearMessage"});
+            dispatch({ type: "clearMessage" });
         }
-    },[dispatch,error,message,alert]);
+    }, [dispatch, error, message, alert]);
 
     return (
-        <div className='create-post-container'>
-            <form className='create-post-form' onSubmit={postSubmitHandler}>
-                <Typography>
-                    New Post
-                </Typography>
-                {image && <img src={image} alt='Post' />}
-                <input type='file' accept='image/*' onChange={handlePostImage} />
-                <input type='text' placeholder='Caption....' value={caption} onChange={(event) => setCaption(event.target.value)} />
-                <input type='text' placeholder='location' value={location} onChange={(event) => setLocation(event.target.value)}/>
-                <Button disabled = {loading} type='submit'>Post</Button>
-            </form>
+        <div className='create-post'>
+            <div className='create-post-container'>
+            <Typography variant='h5' className='create-post-text'>
+                        Create Post
+                    </Typography>
+                <form className='create-post-form' onSubmit={postSubmitHandler}>
+                    <div className='image-box'>
+                    {image && <img src={image} alt='Post' />}
+                    </div>
+                    <input type='file' accept='image/*' onChange={handlePostImage} className='image-input-box' />
+                    <input type='text' className='text-input-box' placeholder='Caption....' value={caption} onChange={(event) => setCaption(event.target.value)} />
+                    <input type='text' className='text-input-box'  placeholder='location' value={location} onChange={(event) => setLocation(event.target.value)} />
+                    <button disabled={loading} type='submit' className='create-post-button'>Post</button>
+                </form>
+            </div>
         </div>
     )
 }
