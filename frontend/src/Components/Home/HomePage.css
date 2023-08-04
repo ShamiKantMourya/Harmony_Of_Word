@@ -35,8 +35,20 @@
     padding: 2vmax;
 }
 .home-friends-area{
-    background-color: var(--ac_white);
     grid-column: 3/4;
+    display: flex;
+    align-content: center;
+    flex-direction: column;  
     box-sizing: border-box;
-    padding: 2vmax;
+    margin-top: 10px;
+}
+.user-profile-area{
+    display: flex;
+   
+   padding: 2px 5px;
+    margin: 3px 5px;
+    border: 1px solid var(--ac_black);
+    background-color: var(--ac_light);
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
