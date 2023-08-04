@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Button, Typography } from '@mui/material';
+import { Avatar } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 
@@ -59,14 +59,17 @@ const UpdateProfile = () => {
     return (
         checkLoading ? <Loader /> : (
             <div className='update-profile'>
+                <div className='update-profile-container'>
                 <form className='update-profile-form' onSubmit={submitHandler}>
-                    <Typography>Update Profile</Typography>
-                    <Avatar src={avatarPreview} alt='UserProfile' sx={{ height: "8vmax", width: "8vmax" }} />
-                    <input type='file' accept='image/*' onChange={imageUpdateHandler} />
-                    <input type='text' placeholder='Name' required value={name} onChange={(event) => setName(event.target.value)} />
-                    <input type='email' placeholder='Name' required value={email} onChange={(event) => setEmail(event.target.value)} />
-                    <Button type='submit' disabled={loading}>Update</Button>
+                    <h4 className='update-profile-text'>Edit Profile</h4>
+                    <Avatar src={avatarPreview} alt='UserProfile' className='update-profile-avatar' sx={{ height: "8vmax", width: "8vmax" }} />
+                    <input type='file' accept='image/*' className='input-file-area' onChange={imageUpdateHandler} />
+                    <input type='text' placeholder='Name' required value={name} className='input-text-area' onChange={(event) => setName(event.target.value)} />
+                    <input type='email' placeholder='Name' required value={email} className='input-email-area' onChange={(event) => setEmail(event.target.value)} />
+                    <button type='submit' className='update-profile-button' disabled={loading}>Update</button>
                 </form>
+                </div>
+               
             </div>
         )
     )
