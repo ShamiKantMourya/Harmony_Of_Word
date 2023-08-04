@@ -84,6 +84,7 @@
     background: none;
     border: none;
     outline: none;
+    cursor: pointer;
 }
 
 .like-comment-delete{
@@ -104,5 +105,12 @@
     display: flex;
     border: none;
     background: none;
+    outline: none;
+    cursor: pointer;
+}
+.delete-option{
+    cursor: pointer;
+    background: none;
+    border: none;
     outline: none;
 }
