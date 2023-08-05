@@ -128,17 +128,17 @@ const Post = ({
         </Typography>
       </div>
       <div className="like-comment-delete">
-       <div className="like-comment-button">
-       <button className="like-option" onClick={handleLike}>
-          {like ? <Favorite /> : <FavoriteBorder />}
-        </button>
-        <button
-          className="comment-option"
-          onClick={() => setToggleComment(!toggleComment)}
-        >
-          <ChatBubbleOutline />
-        </button>
-       </div>
+        <div className="like-comment-button">
+          <button className="like-option" onClick={handleLike}>
+            {like ? <Favorite /> : <FavoriteBorder />}
+          </button>
+          <button
+            className="comment-option"
+            onClick={() => setToggleComment(!toggleComment)}
+          >
+            <ChatBubbleOutline />
+          </button>
+        </div>
         {isDelete ? (
           <button className="delete-option" onClick={deletePostHandler}>
             {" "}
@@ -148,15 +148,17 @@ const Post = ({
       </div>
       <Dialog open={liked} onClose={() => setLiked(!liked)}>
         <div className="dialog-box">
-          <Typography variant="h4">Liked By</Typography>
+          <Typography variant="h5">Liked By</Typography>
           {likes?.map((user) => (
-            <User
-              key={user._id}
-              userId={user._id}
-              name={user.name}
-              location={user.location}
-              avatar={user.avatar.url}
-            />
+            <div className="like-user">
+              <User
+                key={user._id}
+                userId={user._id}
+                name={user.name}
+                location={user.location}
+                avatar={user.avatar.url}
+              />
+            </div>
           ))}
         </div>
       </Dialog>
@@ -166,7 +168,7 @@ const Post = ({
         onClose={() => setToggleComment(!toggleComment)}
       >
         <div className="dialog-box">
-          <Typography variant="h4">Comments</Typography>
+          <Typography variant="h5">Comments</Typography>
           <form className="comment-box" onSubmit={addComment}>
             <input
               type="text"
@@ -174,8 +176,13 @@ const Post = ({
               value={userComments}
               onChange={(event) => setUserComments(event.target.value)}
               required
+              className="add-comment-input"
             />
-            <button type="submit" variant="contained">
+            <button
+              type="submit"
+              variant="contained"
+              className="add-comment-btn"
+            >
               Add
             </button>
           </form>
@@ -193,7 +200,7 @@ const Post = ({
               />
             ))
           ) : (
-            <Typography>No comments</Typography>
+            <p className="no-comments-txt">No comments</p>
           )}
         </div>
       </Dialog>
@@ -203,7 +210,7 @@ const Post = ({
         onClose={() => setToggleCaption(!toggleCaption)}
       >
         <div className="dialog-box">
-          <Typography variant="h4">Update Caption</Typography>
+          <Typography variant="h5">Edit Caption</Typography>
           <form className="comment-box" onSubmit={updateCaptionHandler}>
             <input
               type="text"
@@ -211,8 +218,13 @@ const Post = ({
               value={captionValue}
               onChange={(event) => setCaptionValue(event.target.value)}
               required
+              className="add-comment-input"
             />
-            <button type="submit" variant="contained">
+            <button
+              type="submit"
+              variant="contained"
+              className="update-cation-btn"
+            >
               Update
             </button>
           </form>
