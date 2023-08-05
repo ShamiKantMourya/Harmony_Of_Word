@@ -1,10 +1,14 @@
-import { Typography } from '@mui/material';
+import { Avatar } from '@mui/material';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {
+    Delete
+  } from "@mui/icons-material";
 
 import { getFollowingPost } from '../../Services/postService';
 import { userPosts } from '../../Services/postService';
+import "./CommentCard.css";
 
 const CommentCard = ({
     userId,
@@ -34,19 +38,20 @@ const CommentCard = ({
     return (
         <div className='user-comment-box'>
             <Link to={`/user/${userId}`}>
-                <img src={avatar} alt={name} />
-                <Typography className='comment-user-name'>{name}</Typography>
+                <Avatar src={avatar} alt={name} />
+                <p className='commentcard-name'>{name}</p>
             </Link>
             <div className='comment-of-user'>
-                <Typography>{comment}</Typography>
-            </div>
-            <div className='edit-reply-delete-comment'>
+                <p className='commentcard-comment'>{comment}</p>
+                <div className='edit-reply-delete-comment'>
                 {
-                    isUserAccount ? <button onClick={deleteComment}>delete</button> : userId === user._id ? (
-                        <button onClick={deleteComment}>delete</button>
+                    isUserAccount ? <button onClick={deleteComment}><Delete/></button> : userId === user._id ? (
+                        <button onClick={deleteComment}><Delete/></button>
                     ) : null
                 }
             </div>
+            </div>
+          
 
         </div>
     )
