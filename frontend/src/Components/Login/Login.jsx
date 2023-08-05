@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Email, Https } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from 'react-alert';
 
 import "./Login.css";
 import { loginUser } from '../../Services/userService';
-import { useAlert } from 'react-alert';
 
 const Login = () => {
     const [email, setEmail] = useState();
@@ -36,24 +35,30 @@ const Login = () => {
         }
     }, [error, dispatch, message])
     return (
-        <div>
+        <div className='login-page-box'>
             <div className='login-page'>
-                <Typography variant='h4'>Sign In</Typography>
+                <div className='sign-in-text'>
+ <p className='sign-in'>Sign In</p>
+                </div>
+               
                 <form className='login-form' onSubmit={loginHandler}>
                     <div className='input-email'>
                         <span className="input-icon"><Email /></span>
-                        <input type='email' placeholder='Email' value={email} onChange={(event) => setEmail(event.target.value)} required />
+                        <input type='email' placeholder='Email' value={email} onChange={(event) => setEmail(event.target.value)} required className='sign-in-input-field' />
                     </div>
                     <div className='input-password'>
                         <span className='input-icon'><Https /></span>
-                        <input type='password' placeholder='Password' value={password} onChange={(event) => setPassword(event.target.value)} required />
+                        <input type='password' placeholder='Password' value={password} onChange={(event) => setPassword(event.target.value)} required className='sign-in-input-field'/>
                     </div>
                     <Link to="/forgetpassword">
-                        <Typography>forgot password</Typography>
+                        <p>forgot password?</p>
                     </Link>
-                    <Button type='submit'>Login</Button>
-                    <Link to="/register">
-                        <Typography>New user? Sign Up</Typography>
+                    <div className='login-button'> 
+                        <button type='submit' className='login-btn'>Login</button>
+                        </div>
+                   
+                    <Link to="/register" className='sign-in-register'>
+                        <p>New user? Sign Up</p>
                     </Link>
                 </form>
             </div>
