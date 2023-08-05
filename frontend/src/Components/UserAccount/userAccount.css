@@ -40,18 +40,18 @@
     background-color: var(--ac_white);
     grid-column: 3/4;
     box-sizing: border-box;
-    padding: 2vmax;
 }
 
 .user-profile-container {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 10px;
+    margin: 10px 5px 0px 5px;
     background-color: var(--ac_light);
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    padding: 0px 5px;
 }
 
 .user-profile-container:hover {
@@ -89,6 +89,7 @@
 .user-followers {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     margin: 5px 0px;
 }
 
@@ -109,7 +110,8 @@
 
 .user-post {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    align-items: center;
     margin: 5px 0px;
 }
 
@@ -129,7 +131,23 @@
     justify-content: center;
     margin: 5px 0px;
 }
-
+.logout-btn button{
+    display: flex;
+    justify-content: center;
+    outline: none;
+    background-color: var(--ac_black);
+    color: var(--ac_light);
+    height: 2rem;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 15px;
+}
+.logout-btn button:hover{
+    background-color: var(--ac_light);
+    color: var(--ac_black);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
 .user-change-password {
     display: flex;
     justify-content: center;
@@ -145,4 +163,13 @@
     display: flex;
     justify-content: center;
     margin-bottom: 5px;
+}
+.user-follow-data{
+    display: flex;
+    justify-content: center;
+    margin: 5px 0px;
+    background-color: var(--ac_light);
+    border-radius: 7px;
+    flex-direction: column;
+    padding: 5px 5px;
 }

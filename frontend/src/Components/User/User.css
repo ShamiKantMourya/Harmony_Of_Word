@@ -33,6 +33,9 @@
     justify-content: center;
     flex-direction: column;
 }
+.name-loc .name .loc{
+    display: flex;
+}
 .name-loc p:nth-child(1){
     font-weight: 600;
     color: var(--ac_black);
