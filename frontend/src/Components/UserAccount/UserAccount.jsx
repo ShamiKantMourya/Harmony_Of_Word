@@ -113,13 +113,16 @@ const UserAccount = () => {
                         <Typography variant='h4'>Followers</Typography>
                         {
                             user && user.followers.length > 0 ? user.followers.map((user) =>
-                                <User
+                            <div className='user-follow-data'>
+                                 <User
                                     key={user._id}
                                     userId={user._id}
                                     name={user.name}
                                     location={user.location}
                                     avatar={user.avatar.url}
                                 />
+                            </div>
+                               
                             ) : <Typography>You have no followers</Typography>
                         }
                     </div>
@@ -129,13 +132,16 @@ const UserAccount = () => {
                         <Typography variant='h4'>Following</Typography>
                         {
                             user && user.following.length > 0 ? user.following.map((user) =>
-                                <User
+                            <div className='user-follow-data'>
+ <User
                                     key={user._id}
                                     userId={user._id}
                                     name={user.name}
                                     location={user.location}
                                     avatar={user.avatar.url}
                                 />
+                            </div>
+                               
                             ) : <Typography>Follow someone first</Typography>
                         }
                     </div>
