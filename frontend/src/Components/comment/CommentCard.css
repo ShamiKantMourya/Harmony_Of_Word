@@ -25,34 +25,44 @@
   background-color: var(--ac_light);
   border-radius: 8px;
 }
-.user-comment-box a {
+.avatar-name-comment{
   display: flex;
+}
+.avatar-name-comment a{
   text-decoration: none;
-  padding: 5px 5px;
-  margin: 5px 0px;
-  height: 2.5rem;
 }
-.commentcard-name {
+.avatar-comment-card{
   display: flex;
-  padding: 0px 0px 0px 5px;
-  align-items: flex-start;
-  color: var(--ac_black);
-  font-weight: 600;
-  font-size: 15px;
+  margin: 2px 0px;
 }
-.comment-of-user {
+.name-comment-card{
   display: flex;
-  justify-content: space-evenly;
-  padding: 2px 0px;
-  margin-top: 0px;
+  flex-direction: column;
+  padding: 0px 5px;
+  margin: 2px 0px;
+}
+.commentcard-name{
+  padding: 0px 0px !important;
+  display: flex;
   font-weight: 500;
-  /* align-items: center; */
+  margin-bottom: 2px;
+  color: var(--ac_black)
+}
+.commentcard-comment{
+  padding-left: 10px;
+}
+.comment-delete{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .edit-reply-delete-comment button {
   outline: none;
   background: none;
   cursor: pointer;
-  opacity: 0.4;
+  opacity: 0.5;
+  border: none;
+  margin-left: 15px;
 }
 .edit-reply-delete-comment button:hover {
   opacity: 1;
