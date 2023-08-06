@@ -38,19 +38,19 @@
   justify-content: space-around;
   margin: 5px 0px;
 }
-.no-post-text{
-    display: flex;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 30px;
+.no-post-text {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 30px;
 }
 .user-profile-page-btn {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.user-profile-page-btn button{
-    height: 2rem;
+.user-profile-page-btn button {
+  height: 2rem;
 }
 .user-profile-follow-btn {
   display: flex;
@@ -63,11 +63,12 @@
   cursor: pointer;
   margin: 5px 0px;
   font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .user-profile-page-btn button:hover {
   background-color: var(--ac_light);
   color: var(--ac_black);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }

@@ -32,6 +32,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 5px 5px;
 }
 .name-loc .name .loc{
     display: flex;

@@ -101,6 +101,7 @@
   height: 2.4rem;
   align-items: center;
 }
+
 .like-comment-button button {
   display: flex;
   border: none;
@@ -108,13 +109,18 @@
   outline: none;
   cursor: pointer;
 }
-.delete-option {
+.like-comment-delete button{
   cursor: pointer;
   background: none;
   border: none;
   outline: none;
 }
-
+.delete-option{
+  opacity: 0.5;
+}
+.delete-option:hover{
+  opacity: 1;
+}
 /* dialog box edit */
 .dialog-box {
   display: flex;
@@ -130,7 +136,7 @@
   height: 4rem;
   background-color: var(--ac_light);
   padding: 5px 5px;
-  margin: 5px 0px;
+  margin: 5px 5px;
   border-radius: 7px;
 }
 .comment-box {
@@ -153,6 +159,12 @@
   height: 2rem;
   justify-content: center;
   outline: none;
+}
+.post-comment-card{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 5px 5px;
 }
 .add-comment-input {
   border: 1px solid var(--ac_black);

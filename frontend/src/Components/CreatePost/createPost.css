@@ -84,11 +84,13 @@
 .create-post-button{
     color: var(--accent);
     background-color: var(--ac_black);
+    font-weight: 500;
     height: 1.8rem;
     width: 5rem;
     margin: 8px 0px;
     border-radius: 5px;
     font-size: 15px;
+    cursor: pointer;
 }
 .create-post-button:hover{
     color: var(--ac_black);
