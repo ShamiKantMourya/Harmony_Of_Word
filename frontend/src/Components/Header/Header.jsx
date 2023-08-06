@@ -59,7 +59,7 @@ const Header = () => {
           >
             {tab === "/newpost" ? <Add /> : <AddOutlined />}
           </Link>
-          <Link
+          {/* <Link
             to="/chat"
             onClick={() => {
               setTab("/chat");
@@ -80,7 +80,7 @@ const Header = () => {
             ) : (
               <NotificationsOutlined />
             )}
-          </Link>
+          </Link> */}
           <Link
             to="/account"
             onClick={() => {
