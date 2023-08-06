@@ -103,7 +103,6 @@
 
   .sign-in-register{
     display: flex;
-    justify-content: flex-start !important;
   }
   .login-button{
 display: flex;
