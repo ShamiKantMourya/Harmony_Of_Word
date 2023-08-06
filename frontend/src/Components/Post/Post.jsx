@@ -188,16 +188,18 @@ const Post = ({
           </form>
           {comments.length > 0 ? (
             comments.map((comment) => (
-              <CommentCard
-                key={comment._id}
-                userId={comment.user._id}
-                name={comment.user.name}
-                avatar={comment.user.avatar.url}
-                comment={comment.comment}
-                commentId={comment._id}
-                postId={postId}
-                isUserAccount={isUserAccount}
-              />
+              <div className="post-comment-card">
+                <CommentCard
+                  key={comment._id}
+                  userId={comment.user._id}
+                  name={comment.user.name}
+                  avatar={comment.user.avatar.url}
+                  comment={comment.comment}
+                  commentId={comment._id}
+                  postId={postId}
+                  isUserAccount={isUserAccount}
+                />
+              </div>
             ))
           ) : (
             <p className="no-comments-txt">No comments</p>
