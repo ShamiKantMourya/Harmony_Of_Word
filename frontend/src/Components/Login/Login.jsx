@@ -50,7 +50,7 @@ const Login = () => {
                         <span className='input-icon'><Https /></span>
                         <input type='password' placeholder='Password' value={password} onChange={(event) => setPassword(event.target.value)} required className='sign-in-input-field'/>
                     </div>
-                    <Link to="/forgetpassword">
+                    <Link to="/forget/password">
                         <p>forgot password?</p>
                     </Link>
                     <div className='login-button'> 
