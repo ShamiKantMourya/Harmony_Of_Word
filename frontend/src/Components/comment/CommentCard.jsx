@@ -2,7 +2,7 @@ import { Avatar } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Delete } from "@mui/icons-material";
+import {Delete} from "@mui/icons-material";
 
 import { getFollowingPost } from "../../Services/postService";
 import { userPosts } from "../../Services/postService";
@@ -33,24 +33,30 @@ const CommentCard = ({
 
   return (
     <div className="user-comment-box">
-      <Link to={`/user/${userId}`}>
-        <Avatar src={avatar} alt={name} />
-        <p className="commentcard-name">{name}</p>
-      </Link>
-      <div className="comment-of-user">
-        <p className="commentcard-comment">{comment}</p>
-        <div className="edit-reply-delete-comment">
-          {isUserAccount ? (
-            <button onClick={deleteComment}>
-              <Delete />
-            </button>
-          ) : userId === user._id ? (
-            <button onClick={deleteComment}>
-              <Delete />
-            </button>
-          ) : null}
+      <div className="avatar-name-comment">
+        <div className="avatar-comment-card">
+          <Link to={`/user/${userId}`}>
+            <Avatar src={avatar} alt={name} />
+          </Link>
+        </div>
+        <div className="name-comment-card">
+          <Link to={`/user/${userId}`}>
+            <p className="commentcard-name">{name}</p>
+          </Link>
+          <div className="comment-delete">
+          <p className="commentcard-comment">{comment}</p>
+          <div className="edit-reply-delete-comment">
+        {isUserAccount ? (
+          <button onClick={deleteComment}><Delete /></button>
+        ) : userId === user._id ? (
+          <button onClick={deleteComment}><Delete /></button>
+        ) : null}
+      </div>
+          </div>
+         
         </div>
       </div>
+    
     </div>
   );
 };
