@@ -38,30 +38,36 @@ const ResetPassword = () => {
 
   return (
     <div className='resetPassword'>
-      <Typography>Harmony_Of_Words</Typography>
+     <div className='reset-password-container'>
+     <div className='typography'>
+     <p className='typography-text'>Harmony_Of_Words</p>
+     </div>
 
-      <form className='resetPassword-form' onSubmit={submitHandler}>
-        <input
-          type='password'
-          placeholder='New Password'
-          value={password}
-          required
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <input
-          type='password'
-          placeholder='Confirm Password'
-          value={confirmPassword}
-          required
-          onChange={(event) => setConfirmPassword(event.target.value)}
-        />
+<form className='resetPassword-form' onSubmit={submitHandler}>
+  <input
+    type='password'
+    placeholder='New Password'
+    value={password}
+    required
+    onChange={(event) => setPassword(event.target.value)}
+  />
+  <input
+    type='password'
+    placeholder='Confirm Password'
+    value={confirmPassword}
+    required
+    onChange={(event) => setConfirmPassword(event.target.value)}
+  />
 
-        <Button type='submit' disabled={loading || password !== confirmPassword}>Reset Password</Button>
-        <div className='login-resend-link'>
-          <Link to='/forget/password'><span className='resend-token-txt'>Resend</span></Link>
-          <Link to='/'><span className='login-txt'>Login</span></Link>
-        </div>
-      </form>
+ <div className='reset-password-button'>
+ <button type='submit' disabled={loading || password !== confirmPassword}>Reset Password</button>
+ </div>
+  <div className='login-resend-link'>
+    <Link to='/forget/password'><span className='resend-token-txt'>Resend</span></Link>
+    <Link to='/'><span className='login-txt'>Login</span></Link>
+  </div>
+</form>
+     </div>
     </div>
   )
 }
