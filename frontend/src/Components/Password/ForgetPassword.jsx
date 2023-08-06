@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Typography } from "@mui/material";
+import {Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 
@@ -36,9 +36,12 @@ const ForgetPassword = () => {
 
   return (
     <div className='forgetpassword'>
-      <Typography>
+    <div className='forgetpassword-container'>
+    <div className='forgetpassword-logo'>
+     <Typography>
         Harmony_Of_Words
       </Typography>
+     </div>
       <form className='forgetpassword-form' onSubmit={submitHandler}>
         <input
           type='email'
@@ -48,8 +51,11 @@ const ForgetPassword = () => {
           onChange={(event) => setEmail(event.target.value)}
         />
 
-        <Button disabled={loading} type='submit'>Send Email</Button>
+        <div className='send-mail-btn'>
+        <button disabled={loading} type='submit'>Send Email</button>
+        </div>
       </form>
+    </div>
     </div>
   )
 }
