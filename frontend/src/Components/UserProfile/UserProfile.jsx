@@ -30,6 +30,10 @@ const UserProfile = () => {
     loading: followLoading,
   } = useSelector((state) => state.followUser);
   const { user: myProfile } = useSelector((state) => state.user);
+  const { error: likeError, message: likeMssg } = useSelector((state) => state.like);
+  const { error: commentError, message: commentMssg } = useSelector(
+    (state) => state.comment
+  );
 
   const [followerToggle, setFollowerToggle] = useState(false);
   const [followingToggle, setFollowingToggle] = useState(false);
@@ -81,6 +85,22 @@ const UserProfile = () => {
       alert.error(userError);
       dispatch({ type: "clearErrors" });
     }
+    if (likeError) {
+      alert.error(likeError);
+      dispatch({ type: "clearErrors" });
+    }
+    if (commentError) {
+      alert.error(commentError);
+      dispatch({ type: "clearErrors" });
+    }
+    if (likeMssg) {
+      alert.success(likeMssg);
+      dispatch({ type: "clearMessage" });
+    }
+    if (commentMssg) {
+      alert.success(commentMssg);
+      dispatch({ type: "clearmessage" });
+    }
   }, [
     dispatch,
     alert,
@@ -90,6 +110,10 @@ const UserProfile = () => {
     user,
     myProfile._id,
     params.id,
+    likeMssg,
+    commentMssg,
+    likeError,
+    commentError
   ]);
 
   return loading === true || userLoading === true ? (
@@ -110,6 +134,7 @@ const UserProfile = () => {
               ownerImage={post.owner.avatar.url}
               ownerName={post.owner.name}
               ownerId={post.owner._id}
+              isUserAccount={"user"} //newly added and set value into user
             />
           ))
         ) : (

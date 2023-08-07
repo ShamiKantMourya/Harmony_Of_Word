@@ -20,6 +20,10 @@ const UserAccount = () => {
   const { loading: deleteProfileLoading } = useSelector(
     (state) => state.updateProfile
   );
+  const { error: likeError, message } = useSelector((state) => state.like);
+  const { error: commentError, message: commentMssg } = useSelector(
+    (state) => state.comment
+  );
 
   const [followerToggle, setFollowerToggle] = useState(false);
   const [followingToggle, setFollowingToggle] = useState(false);
@@ -40,6 +44,28 @@ const UserAccount = () => {
     dispatch(userPosts());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch({ type: "clearErrors" });
+    }
+    if (likeError) {
+      alert.error(likeError);
+      dispatch({ type: "clearErrors" });
+    }
+    if (commentError) {
+      alert.error(commentError);
+      dispatch({ type: "clearErrors" });
+    }
+    if (message) {
+      alert.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+    if (commentMssg) {
+      alert.success(commentMssg);
+      dispatch({ type: "clearmessage" });
+    }
+  }, [dispatch, error,likeError, message, commentError, commentMssg,alert]);
   return loading === true || userLoading === true ? (
     <Loader />
   ) : (
@@ -58,7 +84,7 @@ const UserAccount = () => {
               ownerImage={post.owner.avatar.url}
               ownerName={post.owner.name}
               ownerId={post.owner._id}
-              isUserAccount={true}
+              isUserAccount={"account"} //change true into account
               isDelete={true}
             />
           ))
