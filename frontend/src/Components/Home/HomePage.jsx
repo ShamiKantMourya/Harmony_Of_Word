@@ -21,6 +21,9 @@ const HomePage = () => {
     (state) => state.allUsersData
   );
   const { error: likeError, message } = useSelector((state) => state.like);
+  const { error: commentError, message: commentMssg } = useSelector(
+    (state) => state.comment
+  );
 
   const alert = useAlert();
 
@@ -38,11 +41,19 @@ const HomePage = () => {
       alert.error(likeError);
       dispatch({ type: "clearErrors" });
     }
+    if (commentError) {
+      alert.error(commentError);
+      dispatch({ type: "clearErrors" });
+    }
     if (message) {
       alert.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [alert, likeError, error, message, dispatch]);
+    if (commentMssg) {
+      alert.success(commentMssg);
+      dispatch({ type: "clearmessage" });
+    }
+  }, [alert, likeError, error, message, commentMssg,commentError, dispatch]);
 
   return loading === true || userLoading === true ? (
     <Loader />
@@ -64,6 +75,7 @@ const HomePage = () => {
               ownerImage={posts.owner.avatar.url}
               ownerName={posts.owner.name}
               ownerId={posts.owner._id}
+              isUserAccount={"home"} //newly added into home
             />
           ))
         ) : (

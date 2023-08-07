@@ -1,10 +1,10 @@
 import { Avatar } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {Delete} from "@mui/icons-material";
 
-import { getFollowingPost } from "../../Services/postService";
+import { deleteComment, getFollowingPost, getUserPosts } from "../../Services/postService";
 import { userPosts } from "../../Services/postService";
 import "./CommentCard.css";
 
@@ -20,14 +20,23 @@ const CommentCard = ({
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const params = useParams();
 
-  const deleteComment = async () => {
+  const deleteCommentHandler = async () => {
     await dispatch(deleteComment(postId, commentId));
 
-    if (isUserAccount) {
+    if (isUserAccount === "account") {
       dispatch(userPosts());
-    } else {
+    };
+    // else {
+    //   dispatch(getFollowingPost());
+    //   dispatch(getUserPosts(params.id)) //newly added
+    // }
+    if (isUserAccount === "home") {
       dispatch(getFollowingPost());
+    };
+    if (isUserAccount === "user") {
+      dispatch(getUserPosts(params.id));
     }
   };
 
@@ -46,10 +55,10 @@ const CommentCard = ({
           <div className="comment-delete">
           <p className="commentcard-comment">{comment}</p>
           <div className="edit-reply-delete-comment">
-        {isUserAccount ? (
-          <button onClick={deleteComment}><Delete /></button>
+        {isUserAccount === "account" ? (
+          <button onClick={deleteCommentHandler}><Delete /></button>
         ) : userId === user._id ? (
-          <button onClick={deleteComment}><Delete /></button>
+          <button onClick={deleteCommentHandler}><Delete /></button>
         ) : null}
       </div>
           </div>

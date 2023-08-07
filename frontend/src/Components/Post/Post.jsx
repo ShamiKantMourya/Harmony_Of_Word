@@ -17,10 +17,12 @@ import {
   updateLike,
   userPosts,
   deleteUserPost,
+  getUserPosts,
 } from "../../Services/postService";
 import { loadUser } from "../../Services/userService";
 import CommentCard from "../comment/CommentCard";
 import "./Post.css";
+import { useParams } from "react-router";
 
 const Post = ({
   postId,
@@ -33,7 +35,7 @@ const Post = ({
   ownerName,
   ownerId,
   isDelete = false,
-  isUserAccount = false,
+  isUserAccount = "home", // change false into home
 }) => {
   const [like, setLike] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -43,6 +45,7 @@ const Post = ({
   const [toggleCaption, setToggleCaption] = useState(false);
 
   const dispatch = useDispatch();
+  const params = useParams();
   const { user } = useSelector((state) => state.user);
 
   // console.log(typeof (user._id), user._id);
@@ -50,11 +53,21 @@ const Post = ({
     setLike(!like);
     await dispatch(updateLike(postId));
 
-    if (isUserAccount) {
+    if (isUserAccount === "account") {
       dispatch(userPosts());
-    } else {
+    }; 
+    if (isUserAccount === "home") {
       dispatch(getFollowingPost());
+    };
+    if (isUserAccount === "user") {
+      dispatch(getUserPosts(params.id));
     }
+    // if (isUserAccount) {
+    //   dispatch(userPosts());
+    // } else {
+    //   dispatch(getFollowingPost());
+    //   dispatch(getUserPosts(params.id)) //newly added
+    // }
   };
 
   const addComment = async (event) => {
@@ -62,11 +75,21 @@ const Post = ({
 
     await dispatch(addPostComment(postId, userComments));
 
-    if (isUserAccount) {
+    if (isUserAccount === "account") {
       dispatch(userPosts());
-    } else {
+    }; 
+    if (isUserAccount === "home") {
       dispatch(getFollowingPost());
+    };
+    if (isUserAccount === "user") {
+      dispatch(getUserPosts(params.id));
     }
+    // if (isUserAccount) {
+    //   dispatch(userPosts());
+    // } else {
+    //   dispatch(getFollowingPost());
+    //   dispatch(getUserPosts(params.id))
+    // }
   };
 
   const updateCaptionHandler = (event) => {
