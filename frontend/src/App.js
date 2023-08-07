@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-import './App.css';
+import "./App.css";
 import Header from "./Components/Header/Header";
 import Login from "./Components/Login/Login";
 import { loadUser } from "./Services/userService";
@@ -23,26 +23,51 @@ function App() {
 
   useEffect(() => {
     dispatch(loadUser());
-  },[dispatch]);
+  }, [dispatch]);
 
-  const {isAuthenticated} = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
   return (
     <Router>
-      {
-        isAuthenticated &&   <Header />
-      }
+      {isAuthenticated && <Header />}
       <Routes>
-        <Route path="/" element ={ isAuthenticated ? <HomePage /> : <Login />}/>
-        <Route path="/account" element ={ isAuthenticated ? <UserAccount /> : <Login />}/>
-        <Route path="/newpost" element ={ isAuthenticated ? <CreatePost /> : <Login />}/>
-        <Route path="/register" element ={ isAuthenticated ? <UserAccount /> : <SignUp />}/>
-        <Route path="/update/profile" element ={ isAuthenticated ? <UpdateProfile /> : <Login />}/>
-        <Route path="/update/password" element ={ isAuthenticated ? <UpdatePassword /> : <Login />}/>
-        <Route path="/forget/password" element ={ isAuthenticated ? <UpdatePassword /> :  <ForgetPassword />}/>
-        <Route path="/password/reset/:token" element ={ isAuthenticated ? <UpdatePassword /> :  < ResetPassword/>}/>
-        <Route path="/user/:id" element ={ isAuthenticated ? <UserProfile /> : <Login />}/>
-        <Route path="/search" element = { isAuthenticated ? <Search /> : <Login />} />
-        <Route path = "*" element = {<NotFound />} />
+        <Route path="/" element={isAuthenticated ? <HomePage /> : <Login />} />
+        <Route
+          path="/account"
+          element={isAuthenticated ? <UserAccount /> : <Login />}
+        />
+        <Route
+          path="/newpost"
+          element={isAuthenticated ? <CreatePost /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={isAuthenticated ? <UserAccount /> : <SignUp />}
+        />
+        <Route
+          path="/update/profile"
+          element={isAuthenticated ? <UpdateProfile /> : <Login />}
+        />
+        <Route
+          path="/update/password"
+          element={isAuthenticated ? <UpdatePassword /> : <Login />}
+        />
+        <Route
+          path="/forget/password"
+          element={isAuthenticated ? <UpdatePassword /> : <ForgetPassword />}
+        />
+        <Route
+          path="/password/reset/:token"
+          element={isAuthenticated ? <UpdatePassword /> : <ResetPassword />}
+        />
+        <Route
+          path="/user/:id"
+          element={isAuthenticated ? <UserProfile /> : <Login />}
+        />
+        <Route
+          path="/search"
+          element={isAuthenticated ? <Search /> : <Login />}
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
