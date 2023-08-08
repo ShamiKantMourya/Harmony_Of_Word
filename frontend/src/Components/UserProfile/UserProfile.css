@@ -32,11 +32,32 @@
   align-items: center;
   justify-content: space-evenly;
 }
+.user-following button {
+  display: flex;
+  justify-content: center;
+  background-color: var(--ac_white);
+  border-radius: 5px;
+}
+.user-followers button {
+  display: flex;
+  justify-content: center;
+  background-color: var(--ac_white);
+  border-radius: 5px;
+}
 .user-post {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 5px 0px;
+  margin: 5px 12px;
+}
+.user-post .post-text {
+  height: 1.5rem;
+  width: 4rem;
+  background-color: var(--ac_white);
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0px 2px 10px;
 }
 .no-post-text {
   display: flex;
