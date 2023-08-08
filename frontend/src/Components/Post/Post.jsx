@@ -96,6 +96,7 @@ const Post = ({
     event.preventDefault();
     dispatch(updateCaption(captionValue, postId));
     dispatch(userPosts());
+    dispatch(getUserPosts(params.id));
   };
 
   const deletePostHandler = async () => {
