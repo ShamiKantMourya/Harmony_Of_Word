@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
+import {useNavigate} from "react-router-dom";
 
 import "./createPost.css";
 import { createPost } from '../../Services/postService';
@@ -16,7 +17,7 @@ const CreatePost = () => {
     const { loading, error, message } = useSelector((state) => state.createPost);
     const dispatch = useDispatch();
     const alert = useAlert();
-
+    const navigate = useNavigate();
     const handlePostImage = (event) => {
         const file = event.target.files[0];
 
@@ -34,6 +35,7 @@ const CreatePost = () => {
     const postSubmitHandler = async (event) => {
         event.preventDefault();
         await dispatch(createPost(caption, image, location));
+        navigate("/account")
         dispatch(loadUser());
     };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
 
 import "./UpdatePassword.css";
 import { updatePassword } from "../../Services/userService";
@@ -15,10 +16,11 @@ const UpdatePassword = () => {
   );
   const dispatch = useDispatch();
   const alert = useAlert();
-
+  const navigate = useNavigate();
   const handleForgetPassword = (event) => {
     event.preventDefault();
     dispatch(updatePassword(oldPassword, newPassword));
+    navigate("/account");
   };
 
   useEffect(() => {

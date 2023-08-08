@@ -126,7 +126,7 @@ const Post = ({
           />
         </div>
         <div className="edit-option">
-          {isUserAccount ? (
+          {isUserAccount === "account" ? (
             <button onClick={() => setToggleCaption(!toggleCaption)}>
               <MoreVert />
             </button>
