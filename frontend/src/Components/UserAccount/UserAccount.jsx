@@ -126,7 +126,7 @@ const UserAccount = () => {
           </div>
 
           <div className="user-post">
-            <Typography> Post</Typography>
+            <p className="post-text"> Post</p>
             <Typography sx={{ marginLeft: "15px" }}>
               {user.posts.length}
             </Typography>
