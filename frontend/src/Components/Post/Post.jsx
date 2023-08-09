@@ -55,10 +55,10 @@ const Post = ({
 
     if (isUserAccount === "account") {
       dispatch(userPosts());
-    }; 
+    }
     if (isUserAccount === "home") {
       dispatch(getFollowingPost());
-    };
+    }
     if (isUserAccount === "user") {
       dispatch(getUserPosts(params.id));
     }
@@ -77,10 +77,10 @@ const Post = ({
 
     if (isUserAccount === "account") {
       dispatch(userPosts());
-    }; 
+    }
     if (isUserAccount === "home") {
       dispatch(getFollowingPost());
-    };
+    }
     if (isUserAccount === "user") {
       dispatch(getUserPosts(params.id));
     }
