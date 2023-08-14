@@ -17,9 +17,9 @@ const UpdatePassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
-  const handleForgetPassword = (event) => {
+  const handleForgetPassword = async (event) => {
     event.preventDefault();
-    dispatch(updatePassword(oldPassword, newPassword));
+   await dispatch(updatePassword(oldPassword, newPassword));
     navigate("/account");
   };
 
