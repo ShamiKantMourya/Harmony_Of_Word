@@ -102,7 +102,7 @@ export const userPosts = () => async (dispatch) => {
 
         const response = await axios.get("/api/v1/my/posts");
 
-        console.log(response.data);
+        // console.log(response.data);
 
         dispatch({
             type: "myPostSuccess",
@@ -197,7 +197,7 @@ export const getUserPosts = (id) => async (dispatch) => {
         });
 
         const response = await axios.get(`/api/v1/post/userPost/${id}`);
-        console.log(response.data, "getuserPosts")
+        // console.log(response.data, "getuserPosts")
         dispatch({
             type: "userPostSuccess",
             payload: response.data.posts,
