@@ -2,22 +2,19 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Chat,
-  ChatOutlined,
   Add,
   AddOutlined,
   // SearchOutlined,
   Search,
   AccountCircle,
   AccountCircleOutlined,
-  Notifications,
-  NotificationsOutlined,
   Home,
   HomeOutlined,
   Menu,
   // MenuOutlined,
 } from "@mui/icons-material";
-
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 // import IMAGES from '../Image/image';
 import "./Header.css";
 
@@ -59,28 +56,16 @@ const Header = () => {
           >
             {tab === "/newpost" ? <Add /> : <AddOutlined />}
           </Link>
-          {/* <Link
-            to="/chat"
-            onClick={() => {
-              setTab("/chat");
-              setDisplayNav(!displayNav);
-            }}
-          >
-            {tab === "/chat" ? <Chat /> : <ChatOutlined />}
-          </Link>
           <Link
-            to="/notification"
+            to="/bookmark"
             onClick={() => {
-              setTab("/notification");
+              setTab("/bookmark");
               setDisplayNav(!displayNav);
             }}
           >
-            {tab === "/notification" ? (
-              <Notifications />
-            ) : (
-              <NotificationsOutlined />
-            )}
-          </Link> */}
+            {tab === "/bookmark" ? <BookmarkOutlinedIcon /> : <BookmarkBorderOutlinedIcon />}
+          </Link>
+
           <Link
             to="/account"
             onClick={() => {
