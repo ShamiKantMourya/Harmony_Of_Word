@@ -17,6 +17,7 @@ import ResetPassword from "./Components/Password/ResetPassword";
 import UserProfile from "./Components/UserProfile/UserProfile";
 import Search from "./Components/Search/Search";
 import NotFound from "./Components/NotFound/NotFound";
+import Bookmark from "./Components/Bookmark/Bookmark";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ function App() {
         <Route
           path="/account"
           element={isAuthenticated ? <UserAccount /> : <Login />}
+        />
+        <Route
+          path="/bookmark"
+          element={isAuthenticated ? <Bookmark /> : <Login />}
         />
         <Route
           path="/newpost"
