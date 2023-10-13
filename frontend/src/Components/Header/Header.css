@@ -64,7 +64,7 @@
 .header-icons {
   display: grid;
   grid-column: 4/5;
-  grid-template-columns: 1fr repeat(5, 1fr);
+  grid-template-columns: 1fr repeat(6, 1fr);
   justify-content: space-evenly;
   align-items: center;
 }
