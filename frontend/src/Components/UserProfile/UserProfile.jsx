@@ -42,7 +42,7 @@ const UserProfile = () => {
 
   const alert = useAlert();
 
-  console.log(posts, "user profile");
+  // console.log(posts, "user profile");
 
   const followUserHandler = async () => {
     setFollowing(!following);
