@@ -171,4 +171,25 @@ export const userPostReducer = createReducer(initialState,{
     clearErrors: (state) => {
         state.error = null;
     },
+});
+
+export const addBookMarkReducer = createReducer(initialState, {
+    addBookMarkRewquest: (state) => {
+        state.loading = true
+    },
+
+    addBookMarkSuccess: (state, action) => {
+        state.loading = false;
+        state.posts = action.payload;
+    },
+
+    addBookMarkFailure: (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    },
+
+    clearErrors: (state) => {
+        state.error = null;
+    },
+
 })
