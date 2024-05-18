@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 exports.registerUser = async (req, res) => {
     try {
-        const { avatar, name, location, email, password } = req.body;
+        const { avatar, name, location, email, password, bio } = req.body;
         let user = await User.findOne({ email });
         if (user) return res.status(400).json(
             {
@@ -16,7 +16,7 @@ exports.registerUser = async (req, res) => {
                 folder: "avatar",
             });
         user = await User.create({
-            name,location, email, password,
+            name,location, email, password,bio,
             avatar: {
                 public_id: myCloud.public_id,
                 url: myCloud.secure_url
