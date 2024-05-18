@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
         select: false,
     },
     location: String,
+    bio: String,
     posts: [
         {
             type: mongoose.Schema.Types.ObjectId,
