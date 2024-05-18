@@ -90,14 +90,14 @@ export const getAllUsers = (name = "") => async (dispatch) => {
     }
 };
 
-export const registerUser = (avatar, name, location, email, password) => async (dispatch) => {
+export const registerUser = (avatar, name, location, email, password, bio) => async (dispatch) => {
     try {
         dispatch({
             type: "registerRequest",
         });
 
         const response = await axios.post('/api/v1/register', {
-            avatar, name, location, email, password
+            avatar, name, location, email, password, bio
         }, {
             headers: {
                 "Content-Type": "application/json"
@@ -116,14 +116,14 @@ export const registerUser = (avatar, name, location, email, password) => async (
     }
 };
 
-export const updateUserProfile = (name, email, avatar) => async (dispatch) => {
+export const updateUserProfile = (name, email, avatar,bio) => async (dispatch) => {
     try {
         dispatch({
             type: "updateProfileRequest",
         });
 
         const response = await axios.put("/api/v1/update/profile", {
-            name, email, avatar
+            name, email, avatar, bio
         }, {
             headers: {
                 "Content-Type": "application/json",

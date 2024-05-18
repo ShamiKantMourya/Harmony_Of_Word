@@ -28,7 +28,8 @@ const UserAccount = () => {
   const [followerToggle, setFollowerToggle] = useState(false);
   const [followingToggle, setFollowingToggle] = useState(false);
 
-  console.log(posts);
+  // console.log(posts);
+  // console.log(user, "user account")
 
   const logoutHandler = async () => {
     await dispatch(logoutUser());
@@ -104,6 +105,7 @@ const UserAccount = () => {
           <Link to="/update/profile" className="user-Profile-editLink">
             Edit profile
           </Link>
+          <p className="user-profile-bio">{user.bio}</p>
           <div className="followunFollow">
             <div className="user-followers">
               <button

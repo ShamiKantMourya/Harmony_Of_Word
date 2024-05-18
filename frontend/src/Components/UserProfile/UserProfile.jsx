@@ -151,6 +151,7 @@ const UserProfile = () => {
               />
             </div>
             <p className="user-Profile-name">{user.name}</p>
+            <p className="user-profile-bio">{user.bio}</p>
             <div className="user-followers">
               <button onClick={() => setFollowerToggle(!followerToggle)}>
                 followers

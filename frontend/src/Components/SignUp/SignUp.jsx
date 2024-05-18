@@ -11,6 +11,7 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState("");
 
@@ -32,7 +33,7 @@ const SignUp = () => {
   };
   const submitFormHandler = (event) => {
     event.preventDefault();
-    dispatch(registerUser(avatar, name, location, email, password));
+    dispatch(registerUser(avatar, name, location, email, password, bio));
   };
 
   useEffect(() => {
@@ -60,6 +61,14 @@ const SignUp = () => {
             required
             value={name}
             onChange={(event) => setName(event.target.value)}
+            className="sign-up-input-field"
+          />
+                <input
+            type="text"
+            placeholder="Bio"
+            required
+            value={bio}
+            onChange={(event) => setBio(event.target.value)}
             className="sign-up-input-field"
           />
           <input

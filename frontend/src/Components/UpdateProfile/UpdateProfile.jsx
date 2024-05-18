@@ -21,6 +21,7 @@ const UpdateProfile = () => {
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
+  const [bio, setBio] = useState(user.bio);
   const [avatarPreview, setAvatarPreview] = useState(user.avatar.url);
   const [avatar, setAvatar] = useState("");
 
@@ -29,7 +30,7 @@ const UpdateProfile = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    await dispatch(updateUserProfile(name, email, avatar));
+    await dispatch(updateUserProfile(name, email, avatar, bio));
     dispatch(loadUser());
   };
 
@@ -90,6 +91,14 @@ const UpdateProfile = () => {
             value={name}
             className="input-text-area"
             onChange={(event) => setName(event.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Bio"
+            required
+            value={bio}
+            className="input-text-area"
+            onChange={(event) => setBio(event.target.value)}
           />
           <input
             type="email"
