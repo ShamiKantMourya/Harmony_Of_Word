@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Dialog } from "@mui/material";
+import { useAlert } from "react-alert";
 import {
   MoreVert,
   Favorite,
   FavoriteBorder,
   ChatBubbleOutline,
   DeleteOutline,
-  BookmarkBorderIcon,
-  BookmarkIcon
+  BookmarkAdd,
+  BookmarkAdded,
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,6 +21,7 @@ import {
   userPosts,
   deleteUserPost,
   getUserPosts,
+  addPostToBookmark,
 } from "../../Services/postService";
 import { loadUser } from "../../Services/userService";
 import CommentCard from "../comment/CommentCard";
@@ -45,9 +47,11 @@ const Post = ({
   const [toggleComment, setToggleComment] = useState(false);
   const [captionValue, setCaptionValue] = useState(caption);
   const [toggleCaption, setToggleCaption] = useState(false);
+  const [bookmark, setBookmark] = useState(false);
 
   const dispatch = useDispatch();
   const params = useParams();
+  const alert = useAlert();
   const { user } = useSelector((state) => state.user);
 
   // console.log(typeof (user._id), user._id);
@@ -70,6 +74,25 @@ const Post = ({
     //   dispatch(getFollowingPost());
     //   dispatch(getUserPosts(params.id)) //newly added
     // }
+  };
+
+  //Bookmark Handler
+  const bookmarkHandler = async () => {
+    if (!bookmark) {
+      setBookmark(!bookmark);
+      // console.log(postId, "postId");
+      dispatch(addPostToBookmark(postId));
+      alert.success("Bookmark added successfully");
+      dispatch({ type: "clearMessage" });
+    } else {
+      setBookmark(!bookmark);
+      dispatch({
+        type: "removeBookmark",
+        payload: postId,
+      });
+      alert.success("Bookmark removed successfully");
+      dispatch({ type: "clearMessage" });
+    }
   };
 
   const addComment = async (event) => {
@@ -171,12 +194,15 @@ const Post = ({
             <DeleteOutline />{" "}
           </button>
         ) : null}
+        <button className="bookmark-option" onClick={bookmarkHandler}>
+          {bookmark ? <BookmarkAdded /> : <BookmarkAdd />}
+        </button>
       </div>
       <Dialog open={liked} onClose={() => setLiked(!liked)}>
         <div className="dialog-box">
           <Typography variant="h5">Liked By</Typography>
           {likes?.map((user) => (
-            <div className="like-user">
+            <div className="like-user" key={user._id}>
               <User
                 key={user._id}
                 userId={user._id}

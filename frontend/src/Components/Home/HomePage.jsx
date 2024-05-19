@@ -53,7 +53,7 @@ const HomePage = () => {
       alert.success(commentMssg);
       dispatch({ type: "clearmessage" });
     }
-  }, [alert, likeError, error, message, commentMssg,commentError, dispatch]);
+  }, [alert, likeError, error, message, commentMssg, commentError, dispatch]);
 
   return loading === true || userLoading === true ? (
     <Loader />
@@ -87,7 +87,7 @@ const HomePage = () => {
       <div className="home-friends-area">
         {users && users.length > 0 ? (
           users.map((user) => (
-            <div className="user-profile-area">
+            <div className="user-profile-area" key={user._id}>
               <User
                 key={user._id}
                 userId={user._id}
