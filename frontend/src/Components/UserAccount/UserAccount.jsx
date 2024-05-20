@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, Button, Typography, Dialog } from "@mui/material";
-import { useAlert } from "react-alert";
+import { toast } from "react-hot-toast";
 
 import "./userAccount.css";
 import { userPosts } from "../../Services/postService";
@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 
 const UserAccount = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const { loading, error, posts } = useSelector((state) => state.myPost);
   const { user, loading: userLoading } = useSelector((state) => state.user);
@@ -33,7 +32,7 @@ const UserAccount = () => {
 
   const logoutHandler = async () => {
     await dispatch(logoutUser());
-    alert.success("Logout successfully");
+    toast.success("Logout successfully");
   };
 
   const deleteprofile = async () => {
@@ -47,26 +46,26 @@ const UserAccount = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (likeError) {
-      alert.error(likeError);
+      toast.error(likeError);
       dispatch({ type: "clearErrors" });
     }
     if (commentError) {
-      alert.error(commentError);
+      toast.error(commentError);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
     if (commentMssg) {
-      alert.success(commentMssg);
+      toast.success(commentMssg);
       dispatch({ type: "clearmessage" });
     }
-  }, [dispatch, error,likeError, message, commentError, commentMssg,alert]);
+  }, [dispatch, error, likeError, message, commentError, commentMssg]);
   return loading === true || userLoading === true ? (
     <Loader />
   ) : (

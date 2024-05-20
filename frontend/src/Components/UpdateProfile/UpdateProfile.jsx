@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
+import { toast } from "react-hot-toast";
 
 import "./UpdateProfile.css";
 import { loadUser, updateUserProfile } from "../../Services/userService";
@@ -26,7 +26,6 @@ const UpdateProfile = () => {
   const [avatar, setAvatar] = useState("");
 
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -50,18 +49,18 @@ const UpdateProfile = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (updateError) {
-      alert.error(updateError);
+      toast.error(updateError);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [dispatch, error, alert, updateError, message]);
+  }, [dispatch, error, updateError, message]);
 
   return checkLoading ? (
     <Loader />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import "./UpdatePassword.css";
@@ -15,24 +15,23 @@ const UpdatePassword = () => {
     (state) => state.updateProfile
   );
   const dispatch = useDispatch();
-  const alert = useAlert();
   const navigate = useNavigate();
   const handleForgetPassword = async (event) => {
     event.preventDefault();
-   await dispatch(updatePassword(oldPassword, newPassword));
+    await dispatch(updatePassword(oldPassword, newPassword));
     navigate("/account");
   };
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [dispatch, alert, error, message]);
+  }, [dispatch, error, message]);
 
   return (
     <div className="updatePassword">

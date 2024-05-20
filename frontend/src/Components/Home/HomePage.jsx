@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography } from "@mui/material";
-import { useAlert } from "react-alert";
+import { toast } from "react-hot-toast";
 
 import "./HomePage.css";
 import User from "../User/User";
@@ -25,8 +25,6 @@ const HomePage = () => {
     (state) => state.comment
   );
 
-  const alert = useAlert();
-
   useEffect(() => {
     dispatch(getFollowingPost());
     dispatch(getAllUsers());
@@ -34,15 +32,15 @@ const HomePage = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (likeError) {
-      alert.error(likeError);
+      toast.error(likeError);
       dispatch({ type: "clearErrors" });
     }
     if (commentError) {
-      alert.error(commentError);
+      toast.error(commentError);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
@@ -53,7 +51,7 @@ const HomePage = () => {
       alert.success(commentMssg);
       dispatch({ type: "clearmessage" });
     }
-  }, [alert, likeError, error, message, commentMssg, commentError, dispatch]);
+  }, [likeError, error, message, commentMssg, commentError, dispatch]);
 
   return loading === true || userLoading === true ? (
     <Loader />

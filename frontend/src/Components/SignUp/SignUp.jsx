@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { toast } from "react-hot-toast";
 
 import "./SignUp.css";
 import { registerUser } from "../../Services/userService";
@@ -17,7 +17,6 @@ const SignUp = () => {
 
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.user);
-  const alert = useAlert();
 
   const handleProfileImage = (event) => {
     const file = event.target.files[0];
@@ -38,10 +37,10 @@ const SignUp = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
-  }, [dispatch, error, alert]);
+  }, [dispatch, error]);
   return (
     <div className="sign-up-page">
       <div className="Signup-user">
@@ -63,7 +62,7 @@ const SignUp = () => {
             onChange={(event) => setName(event.target.value)}
             className="sign-up-input-field"
           />
-                <input
+          <input
             type="text"
             placeholder="Bio"
             required

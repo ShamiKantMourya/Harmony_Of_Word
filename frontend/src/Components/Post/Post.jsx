@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Dialog } from "@mui/material";
-import { useAlert } from "react-alert";
+import { toast } from "react-hot-toast";
 import {
   MoreVert,
   Favorite,
@@ -11,6 +11,7 @@ import {
   BookmarkAdded,
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 import User from "../User/User";
 import {
@@ -26,7 +27,6 @@ import {
 import { loadUser } from "../../Services/userService";
 import CommentCard from "../comment/CommentCard";
 import "./Post.css";
-import { useParams } from "react-router";
 
 const Post = ({
   postId,
@@ -51,7 +51,7 @@ const Post = ({
 
   const dispatch = useDispatch();
   const params = useParams();
-  const alert = useAlert();
+  // const alert = useAlert();
   const { user } = useSelector((state) => state.user);
 
   // console.log(typeof (user._id), user._id);
@@ -82,7 +82,7 @@ const Post = ({
       setBookmark(!bookmark);
       // console.log(postId, "postId");
       dispatch(addPostToBookmark(postId));
-      alert.success("Bookmark added successfully");
+      toast.success("Bookmark added successfully");
       dispatch({ type: "clearMessage" });
     } else {
       setBookmark(!bookmark);
@@ -90,7 +90,7 @@ const Post = ({
         type: "removeBookmark",
         payload: postId,
       });
-      alert.success("Bookmark removed successfully");
+      toast.success("Bookmark removed successfully");
       dispatch({ type: "clearMessage" });
     }
   };

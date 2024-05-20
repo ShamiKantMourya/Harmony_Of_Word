@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 import "./createPost.css";
 import { createPost } from "../../Services/postService";
@@ -15,7 +15,6 @@ const CreatePost = () => {
 
   const { loading, error, message } = useSelector((state) => state.createPost);
   const dispatch = useDispatch();
-  const alert = useAlert();
   const navigate = useNavigate();
   const handlePostImage = (event) => {
     const file = event.target.files[0];
@@ -39,15 +38,15 @@ const CreatePost = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [dispatch, error, message, alert]);
+  }, [dispatch, error, message]);
 
   return (
     <div className="create-post">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Email, Https } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
+import { toast } from "react-hot-toast";
 
 import "./Login.css";
 import { loginUser } from "../../Services/userService";
@@ -15,7 +15,6 @@ const Login = () => {
   const { message } = useSelector((state) => state.updateProfile);
 
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const loginHandler = (event) => {
     event.preventDefault();
@@ -25,14 +24,14 @@ const Login = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [alert,error, dispatch, message]);
+  }, [error, dispatch, message]);
   return (
     <div className="login-page-box">
       <div className="login-page">

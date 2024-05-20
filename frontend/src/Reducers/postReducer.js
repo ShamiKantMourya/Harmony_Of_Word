@@ -1,197 +1,234 @@
 import { createReducer } from "@reduxjs/toolkit";
 
+import { postReducerTypes } from "../constants/constant";
+
 const initialState = {
   Bookmarks: [],
 };
 
-export const postReducer = createReducer(initialState, {
-  postOfFollowingRequest: (state) => {
+const {
+  postOfFollowingRequest,
+  postOfFollowingSuccess,
+  postOfFollowingFailure,
+  clearErrors,
+  likeRequest,
+  likeSuccess,
+  likeFailure,
+  clearMessage,
+  commentRequest,
+  commentSuccess,
+  commentFailure,
+  deleteCommentRequest,
+  deleteCommentSuccess,
+  deleteCommentFailure,
+  myPostRequest,
+  myPostSuccess,
+  myPostFailure,
+  createPostRequest,
+  createPostSuccess,
+  createPostFailure,
+  updateCaptionRequest,
+  updateCaptionSuccess,
+  updateCaptionFailure,
+  deletePostRequest,
+  deletePostSuccess,
+  deletePostFailure,
+  userPostRequest,
+  userPostSuccess,
+  userPostFailure,
+  addBookMarkRequest,
+  addBookMarkSuccess,
+  addBookMarkFailure,
+  removeBookmark
+} = postReducerTypes;
+
+export const postReducer = createReducer(initialState, (builder) => {
+  builder.addCase(postOfFollowingRequest, (state) => {
     state.loading = true;
-  },
-  postOfFollowingSuccess: (state, action) => {
+  });
+  builder.addCase(postOfFollowingSuccess, (state, action) => {
     state.loading = false;
     state.post = action.payload;
-  },
-  postOfFollowingFailure: (state, action) => {
+  });
+  builder.addCase(postOfFollowingFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
-  clearErrors: (state) => {
+  });
+  builder.addCase(clearErrors, (state) => {
     state.error = null;
-  },
+  });
 });
 
-export const likeReducer = createReducer(initialState, {
-  likeRequest: (state) => {
+export const likeReducer = createReducer(initialState, (builder) => {
+  builder.addCase(likeRequest, (state) => {
     state.loading = true;
-  },
-  likeSuccess: (state, action) => {
+  });
+  builder.addCase(likeSuccess, (state, action) => {
     state.loading = false;
     state.message = action.payload;
-  },
+  });
 
-  likeFailure: (state, action) => {
+  builder.addCase(likeFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
-  clearErrors: (state) => {
+  });
+  builder.addCase(clearErrors, (state) => {
     state.error = null;
-  },
-  clearMessage: (state) => {
+  });
+  builder.addCase(clearMessage, (state) => {
     state.message = null;
-  },
+  });
 });
 
-export const commentReducer = createReducer(initialState, {
-  commentRequest: (state) => {
+export const commentReducer = createReducer(initialState, builder => {
+  builder.addCase(commentRequest, (state) => {
     state.loading = true;
-  },
+  })
 
-  commentSuccess: (state, action) => {
+  builder.addCase(commentSuccess, (state, action) => {
     state.loading = false;
     state.message = action.payload;
-  },
+  })
 
-  commentFailure: (state, action) => {
+  builder.addCase(commentFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
+  })
 
-  deleteCommentRequest: (state) => {
+  builder.addCase(deleteCommentRequest, (state) => {
     state.loading = true;
-  },
+  })
 
-  deleteCommentSuccess: (state, action) => {
+  builder.addCase(deleteCommentSuccess, (state, action) => {
     state.loading = false;
     state.message = action.payload;
-  },
+  })
 
-  deleteCommentFailure: (state, action) => {
+  builder.addCase(deleteCommentFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
+  })
 
-  clearErrors: (state) => {
+  builder.addCase(clearErrors, (state) => {
     state.error = null;
-  },
+  })
 
-  clearMessage: (state) => {
+  builder.addCase(clearMessage, (state) => {
     state.message = null;
-  },
+  })
 });
 
-export const myPostReducer = createReducer(initialState, {
-  myPostRequest: (state) => {
+export const myPostReducer = createReducer(initialState, builder => {
+  builder.addCase(myPostRequest, (state) => {
     state.loading = true;
-  },
+  })
 
-  myPostSuccess: (state, action) => {
+  builder.addCase(myPostSuccess, (state, action) => {
     state.loading = false;
     state.posts = action.payload;
-  },
+  })
 
-  myPostFailure: (state, action) => {
+  builder.addCase(myPostFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
+  })
 
-  clearErrors: (state) => {
+  builder.addCase(clearErrors, (state) => {
     state.error = null;
-  },
+  })
 });
 
-export const createPostReducer = createReducer(initialState, {
-  createPostRequest: (state) => {
+export const createPostReducer = createReducer(initialState, builder => {
+  builder.addCase(createPostRequest, (state) => {
     state.loading = true;
-  },
+  })
 
-  createPostSuccess: (state, action) => {
+  builder.addCase(createPostSuccess, (state, action) => {
     state.loading = false;
     state.message = action.payload;
-  },
+  })
 
-  createPostFailure: (state, action) => {
+  builder.addCase(createPostFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
+  })
 
-  updateCaptionRequest: (state) => {
+  builder.addCase(updateCaptionRequest, (state) => {
     state.loading = true;
-  },
+  })
 
-  updateCaptionSuccess: (state, action) => {
+  builder.addCase(updateCaptionSuccess, (state, action) => {
     state.loading = false;
     state.message = action.payload;
-  },
+  })
 
-  updateCaptionFailure: (state, action) => {
+  builder.addCase(updateCaptionFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
+  })
 
-  deletePostRequest: (state) => {
+  builder.addCase(deletePostRequest, (state) => {
     state.loading = true;
-  },
+  })
 
-  deletePostSuccess: (state, action) => {
+  builder.addCase(deletePostSuccess, (state, action) => {
     state.loading = false;
     state.message = action.payload;
-  },
+  })
 
-  deletePostFailure: (state, action) => {
+  builder.addCase(deletePostFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
+  })
 
-  clearErrors: (state) => {
+  builder.addCase(clearErrors, (state) => {
     state.error = null;
-  },
+  })
 
-  clearMessage: (state) => {
+  builder.addCase(clearMessage, (state) => {
     state.message = null;
-  },
+  })
 });
 
-export const userPostReducer = createReducer(initialState, {
-  userPostRequest: (state) => {
+export const userPostReducer = createReducer(initialState, builder => {
+  builder.addCase(userPostRequest, (state) => {
     state.loading = true;
-  },
+  })
 
-  userPostSuccess: (state, action) => {
+  builder.addCase(userPostSuccess, (state, action) => {
     state.loading = false;
     state.posts = action.payload;
-  },
+  })
 
-  userPostFailure: (state, action) => {
+  builder.addCase(userPostFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
+  })
 
-  clearErrors: (state) => {
+  builder.addCase(clearErrors, (state) => {
     state.error = null;
-  },
+  })
 });
 
-export const addBookMarkReducer = createReducer(initialState, {
-  addBookMarkRequest: (state, action) => {
+export const addBookMarkReducer = createReducer(initialState,builder => {
+  builder.addCase(addBookMarkRequest, (state, action) => {
     state.loading = true;
-    // state.Bookmarks = action.payload;
-  },
-  addBookMarkSuccess: (state, action) => {
+  })
+  builder.addCase(addBookMarkSuccess, (state, action) => {
     state.loading = false;
     state.Bookmarks = action.payload;
-  },
-  addBookMarkFailure: (state, action) => {
+  })
+  builder.addCase(addBookMarkFailure, (state, action) => {
     state.loading = false;
     state.error = action.payload;
-  },
-  removeBookmark: (state, action) => {
+  })
+  builder.addCase(removeBookmark, (state, action) => {
     state.loading = false;
-    state.Bookmarks = [...state.Bookmarks].filter(
+    state.Bookmarks = [state.Bookmarks].filter(
       (bookmark) => bookmark._id === action.payload
     );
-  },
-  clearMessage: (state) => {
+  })
+  builder.addCase(clearMessage, (state) => {
     state.message = null;
-  },
+  })
 });

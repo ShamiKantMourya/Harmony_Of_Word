@@ -1,5 +1,5 @@
 import React from 'react';
-import Lottie from 'react-lottie';
+import Lottie from 'lottie-react';
 import { Link } from "react-router-dom";
 
 import "./NotFound.css";

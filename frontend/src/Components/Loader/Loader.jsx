@@ -1,5 +1,6 @@
 import React from 'react';
-import Lottie from 'react-lottie';
+// import Lottie from 'react-lottie';
+import Lottie  from "lottie-react";
 
 import LoaderAnimate from "../../Animations/Loader.json";
 import "./Loader.css";

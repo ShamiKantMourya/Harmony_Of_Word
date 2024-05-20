@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, Typography, Dialog } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { toast } from "react-hot-toast";
 
 import { getUserPosts } from "../../Services/postService";
 import User from "../User/User";
@@ -30,7 +30,9 @@ const UserProfile = () => {
     loading: followLoading,
   } = useSelector((state) => state.followUser);
   const { user: myProfile } = useSelector((state) => state.user);
-  const { error: likeError, message: likeMssg } = useSelector((state) => state.like);
+  const { error: likeError, message: likeMssg } = useSelector(
+    (state) => state.like
+  );
   const { error: commentError, message: commentMssg } = useSelector(
     (state) => state.comment
   );
@@ -39,8 +41,6 @@ const UserProfile = () => {
   const [followingToggle, setFollowingToggle] = useState(false);
   const [following, setFollowing] = useState(false);
   const [userProfile, setUserProfile] = useState(false);
-
-  const alert = useAlert();
 
   // console.log(posts, "user profile");
 
@@ -72,38 +72,37 @@ const UserProfile = () => {
     }
 
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
 
     if (userError) {
-      alert.error(userError);
+      toast.error(userError);
       dispatch({ type: "clearErrors" });
     }
     if (likeError) {
-      alert.error(likeError);
+      toast.error(likeError);
       dispatch({ type: "clearErrors" });
     }
     if (commentError) {
-      alert.error(commentError);
+      toast.error(commentError);
       dispatch({ type: "clearErrors" });
     }
     if (likeMssg) {
-      alert.success(likeMssg);
+      toast.success(likeMssg);
       dispatch({ type: "clearMessage" });
     }
     if (commentMssg) {
-      alert.success(commentMssg);
+      toast.success(commentMssg);
       dispatch({ type: "clearmessage" });
     }
   }, [
     dispatch,
-    alert,
     userError,
     message,
     error,
@@ -113,7 +112,7 @@ const UserProfile = () => {
     likeMssg,
     commentMssg,
     likeError,
-    commentError
+    commentError,
   ]);
 
   return loading === true || userLoading === true ? (
