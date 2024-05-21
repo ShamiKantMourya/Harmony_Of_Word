@@ -182,7 +182,7 @@ const UserAccount = () => {
             <Typography variant="h4">Following</Typography>
             {user && user.following.length > 0 ? (
               user.following.map((user) => (
-                <div className="user-follow-data">
+                <div className="user-follow-data" key={user._id}>
                   <User
                     key={user._id}
                     userId={user._id}

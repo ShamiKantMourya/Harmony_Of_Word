@@ -5,7 +5,7 @@ import Post from "../Post/Post";
 
 const Bookmark = () => {
   const { Bookmarks } = useSelector((state) => state.bookMark);
-  // console.log(Bookmarks, "bookmark post");
+  console.log(Bookmarks, "bookmark post");
   return (
     <div className="user-post-section">
       {Bookmarks && Bookmarks.length > 0 ? (

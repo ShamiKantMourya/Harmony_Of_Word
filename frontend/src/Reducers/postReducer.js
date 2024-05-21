@@ -216,7 +216,7 @@ export const addBookMarkReducer = createReducer(initialState,builder => {
   })
   builder.addCase(addBookMarkSuccess, (state, action) => {
     state.loading = false;
-    state.Bookmarks = action.payload;
+    state.Bookmarks =  [...state.Bookmarks, action.payload];
   })
   builder.addCase(addBookMarkFailure, (state, action) => {
     state.loading = false;
@@ -224,8 +224,8 @@ export const addBookMarkReducer = createReducer(initialState,builder => {
   })
   builder.addCase(removeBookmark, (state, action) => {
     state.loading = false;
-    state.Bookmarks = [state.Bookmarks].filter(
-      (bookmark) => bookmark._id === action.payload
+    state.Bookmarks = [...state.Bookmarks].filter(
+      (bookmark) => bookmark._id !== action.payload
     );
   })
   builder.addCase(clearMessage, (state) => {

@@ -1,12 +1,23 @@
 import axios from "axios";
+import Cookies from "js-cookie";
+
+import { API_URL } from "../constants/constant";
 
 export const getFollowingPost = () => async (dispatch) => {
   try {
     dispatch({
       type: "postOfFollowingRequest",
     });
+    const token = Cookies.get("token");
+    // console.log(token, "get following post")
 
-    const response = await axios.get("/api/v1/followingPosts");
+    const response = await axios.get(`${API_URL}/api/v1/followingPosts`, {
+      headers: {
+        Authorization: token, // Include the token in the Authorization header
+        "Content-Type": "application/json", // Optional: Set the content type
+      },
+    });
+    // console.log(response, "get following posts");
     dispatch({
       type: "postOfFollowingSuccess",
       payload: response.data.posts,
@@ -24,8 +35,14 @@ export const updateLike = (id) => async (dispatch) => {
     dispatch({
       type: "likeRequest",
     });
+    const token = Cookies.get("token");
 
-    const response = await axios.get(`/api/v1/post/${id}`);
+    const response = await axios.get(`${API_URL}/api/v1/post/${id}`, {
+      headers: {
+        Authorization: token, // Include the token in the Authorization header
+        "Content-Type": "application/json", // Optional: Set the content type
+      },
+    });
 
     dispatch({
       type: "likeSuccess",
@@ -44,14 +61,15 @@ export const addPostComment = (id, comment) => async (dispatch) => {
     dispatch({
       type: "commentRequest",
     });
-
+    const token = Cookies.get("token");
     const response = await axios.put(
-      `/api/v1/post/comment/${id}`,
+      `${API_URL}/api/v1/post/comment/${id}`,
       {
         comment,
       },
       {
         headers: {
+          Authorization: token, // Include the token in the Authorization header
           "Content-Type": "application/json",
         },
       }
@@ -74,10 +92,19 @@ export const deleteComment = (id, commentId) => async (dispatch) => {
     dispatch({
       type: "deleteCommentRequest",
     });
-
-    const response = await axios.delete(`/api/v1/post/comment/${id}`, {
-      data: { commentId },
-    });
+    const token = Cookies.get("token");
+    const response = await axios.delete(
+      `${API_URL}/api/v1/post/comment/${id}`,
+      {
+        headers: {
+          Authorization: token, // Include the token in the Authorization header
+          "Content-Type": "application/json",
+        },
+      },
+      {
+        data: { commentId },
+      }
+    );
 
     dispatch({
       type: "deleteCommentSuccess",
@@ -97,7 +124,14 @@ export const userPosts = () => async (dispatch) => {
       type: "myPostRequest",
     });
 
-    const response = await axios.get("/api/v1/my/posts");
+    const token = Cookies.get("token");
+    // console.log(token, "my posts")
+    const response = await axios.get(`${API_URL}/api/v1/my/posts`, {
+      headers: {
+        Authorization: token, // Include the token in the Authorization header
+        "Content-Type": "application/json", // Optional: Set the content type
+      },
+    });
 
     // console.log(response.data);
 
@@ -118,9 +152,9 @@ export const createPost = (caption, image, location) => async (dispatch) => {
     dispatch({
       type: "createPostRequest",
     });
-
+    const token = Cookies.get("token");
     const response = await axios.post(
-      "/api/v1/post/createpost",
+      `${API_URL}/api/v1/post/createpost`,
       {
         caption,
         image,
@@ -128,6 +162,7 @@ export const createPost = (caption, image, location) => async (dispatch) => {
       },
       {
         headers: {
+          Authorization: token,
           "Content-Type": "application/json",
         },
       }
@@ -151,13 +186,15 @@ export const updateCaption = (caption, id) => async (dispatch) => {
       type: "updateCaptionRequest",
     });
 
+    const token = Cookies.get("token");
     const response = await axios.put(
-      `/api/v1/post/${id}`,
+      `${API_URL}/api/v1/post/${id}`,
       {
         caption,
       },
       {
         headers: {
+          Authorization: token,
           "Content-Type": "application/json",
         },
       }
@@ -181,7 +218,13 @@ export const deleteUserPost = (id) => async (dispatch) => {
       type: "deletePostRequest",
     });
 
-    const response = await axios.delete(`/api/v1/post/${id}`);
+    const token = Cookies.get("token");
+    const response = await axios.delete(`${API_URL}/api/v1/post/${id}`, {
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+    });
     dispatch({
       type: "deletePostSuccess",
       payload: response.data.message,
@@ -200,7 +243,13 @@ export const getUserPosts = (id) => async (dispatch) => {
       type: "userPostRequest",
     });
 
-    const response = await axios.get(`/api/v1/post/userPost/${id}`);
+    const token = Cookies.get("token");
+    const response = await axios.get(`${API_URL}/api/v1/post/userPost/${id}`, {
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+    });
     // console.log(response.data, "getuserPosts")
     dispatch({
       type: "userPostSuccess",
@@ -218,10 +267,17 @@ export const addPostToBookmark = (id) => async (dispatch) => {
     dispatch({
       type: "addBookMarkRequest",
     });
-    // console.log(id, "bookmark id")
-    const response = await axios.get("/api/v1/user/posts");
-    // console.log(response.data.posts);
-    const bookmarkPost = response.data.posts.filter((post) => post._id === id);
+    // console.log(id, "bookmark id");
+    const token = Cookies.get("token");
+    const response = await axios.get(`${API_URL}/api/v1/user/posts`, {
+     headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+     }
+    });
+    // console.log(response.data.posts, "all posts");
+    const bookmarkPost = response.data.posts.find((post) => post._id === id);
+    // console.log(bookmarkPost, "bookmarkPost");
     dispatch({
       type: "addBookMarkSuccess",
       payload: bookmarkPost,
