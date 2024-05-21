@@ -40,6 +40,6 @@ router
   .delete(isAuthenticated, deleteComment); //change in route
 
 //Get all posts
-router.route("/user/posts").get(getAllPosts);
+router.route("/user/posts").get(isAuthenticated, getAllPosts);
 
 module.exports = router;
