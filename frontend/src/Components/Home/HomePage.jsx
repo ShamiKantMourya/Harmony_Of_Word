@@ -44,11 +44,11 @@ const HomePage = () => {
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
     if (commentMssg) {
-      alert.success(commentMssg);
+      toast.success(commentMssg);
       dispatch({ type: "clearmessage" });
     }
   }, [likeError, error, message, commentMssg, commentError, dispatch]);
