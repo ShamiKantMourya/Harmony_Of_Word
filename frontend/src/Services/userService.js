@@ -18,7 +18,7 @@ export const loginUser = (email, password) => async (dispatch) => {
         },
       }
     );
-    console.log(response, "login user");
+    // console.log(response, "login user");
     if (response.status === 200) {
       Cookies.set("token", response.data.token, { expires: 1 });
     }
@@ -61,7 +61,7 @@ export const loadUser = () => async (dispatch) => {
     });
 
     const token = Cookies.get("token");
-    console.log(token, "token load user");
+    // console.log(token, "token load user");
 
     const response = await axios.get(`${API_URL}/api/v1/profile/myProfile`, {
       headers: {

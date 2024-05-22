@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 import User from "../User/User";
+
 import {
   addPostComment,
   getFollowingPost,
@@ -26,7 +27,6 @@ import {
 } from "../../Services/postService";
 import { loadUser } from "../../Services/userService";
 import CommentCard from "../comment/CommentCard";
-import "./Post.css";
 
 const Post = ({
   postId,
@@ -53,6 +53,10 @@ const Post = ({
   const params = useParams();
   // const alert = useAlert();
   const { user } = useSelector((state) => state.user);
+  const {Bookmarks} = useSelector((state) => state.bookMark);
+
+  const isInBookmark = Bookmarks?.some((bookmark) => bookmark._id === postId);
+  // console.log(isInBookmark, "isBookmark")
 
   // console.log(typeof (user._id), user._id);
   const handleLike = async () => {
@@ -80,6 +84,10 @@ const Post = ({
   const bookmarkHandler = async () => {
     if (!bookmark) {
       setBookmark(!bookmark);
+      dispatch({
+        type: "setBookmarkFn",
+        payload: true
+      })
       // console.log(postId, "postId");
       dispatch(addPostToBookmark(postId));
       toast.success("Bookmark added successfully");
@@ -90,6 +98,10 @@ const Post = ({
         type: "removeBookmark",
         payload: postId,
       });
+      dispatch({
+        type: "setBookmarkFn",
+        payload: false
+      })
       toast.success("Bookmark removed successfully");
       dispatch({ type: "clearMessage" });
     }
@@ -195,7 +207,7 @@ const Post = ({
           </button>
         ) : null}
         <button className="bookmark-option" onClick={bookmarkHandler}>
-          {bookmark ? <BookmarkAdded /> : <BookmarkAdd />}
+          {isInBookmark ? <BookmarkAdded /> : <BookmarkAdd />}
         </button>
       </div>
       <Dialog open={liked} onClose={() => setLiked(!liked)}>

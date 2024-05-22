@@ -74,5 +74,6 @@ export const postReducerTypes = {
     addBookMarkRequest: "addBookMarkRequest",
     addBookMarkSuccess: "addBookMarkSuccess",
     addBookMarkFailure: "addBookMarkFailure",
-    removeBookmark: "removeBookmark"
+    removeBookmark: "removeBookmark",
+    setBookmarkFn: "setBookmarkFn"
 }
