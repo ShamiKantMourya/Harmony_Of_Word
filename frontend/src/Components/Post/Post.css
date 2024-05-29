@@ -195,3 +195,6 @@
   cursor: pointer;
   padding: 2px 2px;
 }
+.FavoriteBorder{
+  color: red;
+}
