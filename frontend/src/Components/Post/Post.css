@@ -47,6 +47,7 @@
   border: none;
   outline: none;
   cursor: pointer;
+  font-weight: 500;
 }
 .post-caption {
   display: flex;
