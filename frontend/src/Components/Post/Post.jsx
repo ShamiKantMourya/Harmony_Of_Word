@@ -289,7 +289,7 @@ const Post = ({
             <button
               type="submit"
               variant="contained"
-              className="update-cation-btn"
+              className="update-caption-btn"
             >
               Update
             </button>
