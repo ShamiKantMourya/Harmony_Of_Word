@@ -18,7 +18,7 @@
   
   @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200;300;400;500;600;700&display=swap");
   
-  .login-page-box{
+  /* .login-page-box{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,4 +129,106 @@ margin: 5px 0px;
   background-color: var(--ac_light);
   color: var(--ac_black);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+} */
+
+.login-page-box{
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login_container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 800px;
+  height: 500px;
+  border: 1px solid var(--ac_white);
+  border-radius: 5px;
+}
+.login_container_img{
+  grid-column: 1/2;
+  width: 450px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.login_container_img img{
+  width: 420px;
+  height: 100%;
+  padding: 10px 0px;
+}
+.login-page{
+  grid-column: 2/3;
+  width: calc(800px - 450px);
+  border-left: 1px solid var(--ac_white);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.sign-in-text{
+  height: 80px;
+}
+.sign-in-text p{
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ac_white);
+}
+.user_porfile_img{
+  height: 100%;
+  width: 80px;
+  border: 2px solid var(--ac_white);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+.user_porfile_img img{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.login-form{
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+}
+.login-form input{
+  border: none;
+  outline: none;
+  background: none;
+  margin-left: 10px;
+  color: var(--ac_white);
+  height: 100%;
+  font-weight: 500;
+}
+.login-form input::placeholder{
+  color: var(--ac_white);
+  font-weight: 500;
+}
+.input-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 100%;
+  margin: 10px 0px;
+  border: 1px solid var(--ac_white);
+  border-radius: 5px;
+}
+.input-icon{
+  color: var(--ac_white);
+}
+.login-button{
+  display: flex;
+  justify-content: space-between;
+}
+.login-button button{
+  margin-right: 20px;
+}
+.eye_password{
+  cursor: pointer;
+  color: var(--ac_white);
+  padding-right: 5px;
 }

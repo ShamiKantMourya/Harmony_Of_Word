@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Email, Https } from "@mui/icons-material";
+import { Email, Https, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 
@@ -10,6 +10,7 @@ import { loginUser } from "../../Services/userService";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const { error } = useSelector((state) => state.user);
   const { message } = useSelector((state) => state.updateProfile);
@@ -34,51 +35,64 @@ const Login = () => {
   }, [error, dispatch, message]);
   return (
     <div className="login-page-box">
-      <div className="login-page">
-        <div className="sign-in-text">
-          <p className="sign-in">Sign In</p>
+      <div className="login_container">
+        <div className="login_container_img">
+          <img src="login.jpg" alt="login" />
         </div>
-
-        <form className="login-form" onSubmit={loginHandler}>
-          <div className="input-email">
-            <span className="input-icon">
-              <Email />
-            </span>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              required
-              className="sign-in-input-field"
-            />
-          </div>
-          <div className="input-password">
-            <span className="input-icon">
-              <Https />
-            </span>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              required
-              className="sign-in-input-field"
-            />
-          </div>
-          <Link to="/forget/password">
-            <p>forgot password?</p>
-          </Link>
-          <div className="login-button">
-            <button type="submit" className="login-btn">
-              Login
-            </button>
+        <div className="login-page">
+          <div className="sign-in-text">
+            <div className="user_porfile_img">
+              <img src="mavatar.jpg" alt="profile pic" />
+            </div>
+            <p>Sign In</p>
           </div>
 
-          <Link to="/register" className="sign-in-register">
-            <p>New user? Sign Up</p>
-          </Link>
-        </form>
+          <form className="login-form" onSubmit={loginHandler}>
+            <div className="input-box">
+              <span className="input-icon">
+                <Email />
+              </span>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                className="sign-in-input-field"
+              />
+            </div>
+            <div className="input-box">
+              <span className="input-icon">
+                <Https />
+              </span>
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+                className="sign-in-input-field"
+              />
+              <div
+                className="eye_password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </div>
+            </div>
+            <Link to="/forget/password">
+              <p>forgot password?</p>
+            </Link>
+            <div className="login-button">
+              <button type="submit" className="login-btn">
+                Login
+              </button>
+              <Link to="/register" className="sign-in-register">
+                <p>New user? Sign Up</p>
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
