@@ -80,17 +80,41 @@ const Login = () => {
                 {showPassword ? <Visibility /> : <VisibilityOff />}
               </div>
             </div>
-            <Link to="/forget/password">
-              <p>forgot password?</p>
-            </Link>
-            <div className="login-button">
-              <button type="submit" className="login-btn">
-                Login
-              </button>
-              <Link to="/register" className="sign-in-register">
-                <p>New user? Sign Up</p>
+            <div className="forget__remember">
+              <div className="remember">
+                <input
+                  type="checkbox"
+                  value="remember"
+                  className="remember__input"
+                />
+                <label for="remember">Remember me</label>
+              </div>
+              <Link to="/forget/password" className="forget__password">
+                <p>forgot password?</p>
               </Link>
             </div>
+            <button type="submit" className="animated-button">
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-2"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">Login</span>
+              <span className="circle"></span>
+              <svg
+                viewBox="0 0 24 24"
+                className="arr-1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+            </button>
+
+            <Link to="/register" className="sign-in-register">
+              <p>Don't have an account? Sign Up</p>
+            </Link>
           </form>
         </div>
       </div>

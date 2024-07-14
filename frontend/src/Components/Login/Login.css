@@ -1,165 +1,61 @@
 :root {
-    --accent: #aadee8;
-    --ac_dark: #4798a3;
-    --ac_black: #06272b;
-    --ac_light: #d3edf1;
-    --ac_white: #fff;
-  }
-  
-  *,
-  *::after,
-  *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* border: 1px dashed red; */
-    font-family: "Montserrat", sans-serif;
-  }
-  
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200;300;400;500;600;700&display=swap");
-  
-  /* .login-page-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-  }
-  .login-page{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    height: 20rem;
-    width: min(100%, 25rem);
-    border: 1px solid var(--ac_black);
-    border-radius: 7px;
-    background-color: var(--ac_light);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  .login-page:hover{
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  }
-  .login-form{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 5px 10px;
-  }
-  .sign-in-text{
-    display: flex;
-    justify-content: center;
-  }
-  .sign-in{
-    display: flex;
-    font-size: 30px;
-    font-weight: 600;
-    justify-content: center;
-    margin: 5px 0px;
-    padding: 5px 0px;
-    color: var(--ac_dark);
-  }
-  .login-form input{
-    display: flex;
-    justify-content: center;
-    padding: 5px 5px;
-    height: 2rem;
-    margin: 5px 0px;
-    width: 15rem;
-    outline: none;
-    font-weight: 500;
-    margin-left: 5px;
-  }
-  .input-email {
-    display: flex;
-    justify-content: center;
-    height: 2rem;
-    align-items: center;
-    margin: 5px 5px;
-  }
-  .input-password{
-    display: flex;
-    justify-content: center;
-    height: 2rem;
-    align-items: center;
-    margin: 5px 5px;
-  }
-  .login-form a{
-    display: flex;
-    text-decoration: none;
-    height: 2rem;
-    align-items: center;
-    justify-content: flex-end;
-    color: var(--ac_black);
-    font-weight: 500;
-    opacity: 0.6;
-  }
-  .login-form a:hover{
-    opacity: 1;
-  }
-.sign-in-input-field{
-  border-radius: 7px;
+  --accent: #aadee8;
+  --ac_dark: #4798a3;
+  --ac_black: #06272b;
+  --ac_light: #d3edf1;
+  --ac_white: #fff;
 }
 
-  .sign-in-register{
-    display: flex;
-  }
-  .login-button{
-display: flex;
-justify-content: center;
-margin: 5px 0px;
-  }
-.login-form button{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2rem;
-  width: 5rem;
-  outline: none;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 15px;
-  background-color: var(--ac_black);
-  color: var(--ac_light);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border-radius: 5px;
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px dashed red; */
+  font-family: "Montserrat", sans-serif;
 }
-.login-form button:hover{
-  background-color: var(--ac_light);
-  color: var(--ac_black);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-} */
 
-.login-page-box{
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200;300;400;500;600;700&display=swap");
+
+.login-page-box {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.login_container{
+.login_container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 800px;
   height: 500px;
-  border: 1px solid var(--ac_white);
-  border-radius: 5px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
-.login_container_img{
+.login_container_img {
   grid-column: 1/2;
   width: 450px;
   height: 100%;
   display: flex;
   justify-content: center;
 }
-.login_container_img img{
+.login_container_img img {
   width: 420px;
   height: 100%;
   padding: 10px 0px;
 }
-.login-page{
+.login-page {
   grid-column: 2/3;
   width: calc(800px - 450px);
   border-left: 1px solid var(--ac_white);
@@ -168,15 +64,15 @@ margin: 5px 0px;
   justify-content: space-around;
   align-items: center;
 }
-.sign-in-text{
+.sign-in-text {
   height: 80px;
 }
-.sign-in-text p{
+.sign-in-text p {
   font-size: 28px;
   font-weight: 600;
   color: var(--ac_white);
 }
-.user_porfile_img{
+.user_porfile_img {
   height: 100%;
   width: 80px;
   border: 2px solid var(--ac_white);
@@ -184,17 +80,18 @@ margin: 5px 0px;
   display: flex;
   justify-content: center;
 }
-.user_porfile_img img{
+.user_porfile_img img {
   height: 100%;
   width: 100%;
   border-radius: 50%;
 }
-.login-form{
+.login-form {
   height: 350px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
-.login-form input{
+.login-form input {
   border: none;
   outline: none;
   background: none;
@@ -202,14 +99,16 @@ margin: 5px 0px;
   color: var(--ac_white);
   height: 100%;
   font-weight: 500;
+  width: 100%;
 }
-.login-form input::placeholder{
+.login-form input::placeholder {
   color: var(--ac_white);
   font-weight: 500;
+  text-align: left;
 }
-.input-box{
+.input-box {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 2rem;
   width: 100%;
@@ -217,18 +116,134 @@ margin: 5px 0px;
   border: 1px solid var(--ac_white);
   border-radius: 5px;
 }
-.input-icon{
+.input-icon {
   color: var(--ac_white);
+  padding: 0px 5px;
 }
-.login-button{
-  display: flex;
-  justify-content: space-between;
-}
-.login-button button{
-  margin-right: 20px;
-}
-.eye_password{
+.eye_password {
   cursor: pointer;
   color: var(--ac_white);
   padding-right: 5px;
+}
+.forget__password {
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--ac_white);
+  margin: 3px 0px;
+  font-weight: 500;
+}
+.forget__remember {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 100%; */
+}
+.remember {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+}
+.remember input {
+  width: 20px;
+  margin-right: 5px;
+}
+.remember label {
+  color: var(--ac_white);
+  font-weight: 500;
+}
+
+.animated-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 30px;
+  border: 2px solid;
+  border-color: transparent;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 500;
+  color: var(--ac_white);
+  box-shadow: 0 0 0 2px var(--ac_white);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  margin: 20px 0px;
+}
+
+.animated-button svg {
+  position: absolute;
+  width: 24px;
+  fill: var(--ac_white);
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .arr-1 {
+  right: 16px;
+}
+
+.animated-button .arr-2 {
+  left: -25%;
+}
+
+.animated-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: var(--ac_white);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: #212121;
+  border-radius: 12px;
+}
+
+.animated-button:hover .arr-1 {
+  right: -25%;
+}
+
+.animated-button:hover .arr-2 {
+  left: 16px;
+}
+
+.animated-button:hover .text {
+  transform: translateX(12px);
+}
+
+.animated-button:hover svg {
+  fill: #212121;
+}
+
+.animated-button:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px var(--ac_white);
+}
+
+.animated-button:hover .circle {
+  width: 220px;
+  height: 220px;
+  opacity: 1;
+}
+.sign-in-register {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--ac_white);
+  margin-top: 10px;
 }
