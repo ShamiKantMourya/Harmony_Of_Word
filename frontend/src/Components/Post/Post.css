@@ -49,6 +49,9 @@
   outline: none;
   background: none;
 }
+.post-caption{
+  padding-top: 10px;
+}
 .post-image {
   height: 400px;
   width: 480px;
@@ -62,11 +65,21 @@
 }
 .like-comment {
   display: flex;
+  justify-content: space-between;
+  width: 90px;
+  padding: 0px 4px;
 }
 .like-comment button {
   border: none;
   outline: none;
   background: none;
+  cursor: pointer;
+}
+.like-comment-button, .delete__bookmark{
+  width: 90px;
+  display: flex;
+  justify-content: space-between;
+
 }
 .like-comment-delete {
   display: flex;

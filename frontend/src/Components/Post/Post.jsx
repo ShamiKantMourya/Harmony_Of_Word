@@ -188,13 +188,13 @@ const Post = ({
           <Typography>{likes.length} likes</Typography>
         </button>
         <Typography className="comment-btn">
-          {comments.length}Comments
+          {comments.length}
         </Typography>
       </div>
       <div className="like-comment-delete">
         <div className="like-comment-button">
           <button className="like-option" onClick={handleLike}>
-            {like ? <Favorite /> : <FavoriteBorder />}
+            {like ? <Favorite style={{ color: '#FF0000' }} /> : <FavoriteBorder />}
           </button>
           <button
             className="comment-option"
