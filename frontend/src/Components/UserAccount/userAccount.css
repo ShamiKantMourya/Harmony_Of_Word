@@ -29,17 +29,11 @@
 }
 
 .user-post-section {
-  background-color: var(--accent);
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   width: 100%;
   height: 100%;
   grid-column: 2/3;
-  box-sizing: border-box;
-  padding: 2vmax;
+  padding: 10px 0px;
 }
-
 .user-friend-section {
   background-color: var(--ac_white);
   grid-column: 3/4;
