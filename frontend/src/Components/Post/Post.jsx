@@ -27,6 +27,7 @@ import {
 } from "../../Services/postService";
 import { loadUser } from "../../Services/userService";
 import CommentCard from "../comment/CommentCard";
+import "./Post.css";
 
 const Post = ({
   postId,
@@ -151,6 +152,8 @@ const Post = ({
     });
   }, [likes, user._id]);
 
+  // console.log(postImage, "post Image")
+
   return (
     <div className="post-container">
       <div className="user-detail-edit-option">
@@ -200,6 +203,7 @@ const Post = ({
             <ChatBubbleOutline />
           </button>
         </div>
+        <div className="delete__bookmark">
         {isDelete ? (
           <button className="delete-option" onClick={deletePostHandler}>
             {" "}
@@ -209,6 +213,7 @@ const Post = ({
         <button className="bookmark-option" onClick={bookmarkHandler}>
           {isInBookmark ? <BookmarkAdded /> : <BookmarkAdd />}
         </button>
+        </div>
       </div>
       <Dialog open={liked} onClose={() => setLiked(!liked)}>
         <div className="dialog-box">
