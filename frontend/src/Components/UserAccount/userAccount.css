@@ -44,6 +44,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  width: 20rem;
   margin: 10px 5px 0px 5px;
   background-color: var(--ac_light);
   border-radius: 8px;
@@ -72,10 +73,12 @@
 .user-Profile-editLink {
   display: flex;
   justify-content: center;
-  text-decoration: none;
+  text-decoration: underline;
   font-size: 15px;
   color: var(--ac_black);
   margin-bottom: 10px;
+  font-weight: 600;
+  margin: 5px 0px;
 }
 
 .followunFollow {
@@ -106,21 +109,25 @@
   border-radius: 5px;
 }
 
-.user-post1 {
+.user-post {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   margin: 5px 0px;
 }
-.post-text {
+.user-post .post-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 1.5rem;
   width: 4rem;
   background-color: var(--ac_white);
   border-radius: 5px;
   align-items: center;
   justify-content: center;
-  /* padding: 2px 0px 2px 5px; */
+  margin-right: 82px;
+  font-size: 14px;
 }
 .user-profile-container button {
   display: flex;

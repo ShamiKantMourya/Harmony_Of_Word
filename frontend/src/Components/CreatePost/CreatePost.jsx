@@ -51,9 +51,11 @@ const CreatePost = () => {
   return (
     <div className="create-post">
       <div className="create-post-container">
+        <div className="create-post-container-box">
         <Typography variant="h5" className="create-post-text">
           Create Post
         </Typography>
+        </div>
         <form className="create-post-form" onSubmit={postSubmitHandler}>
           <div className="image-box">
             {image && <img src={image} alt="Post" />}
@@ -73,7 +75,7 @@ const CreatePost = () => {
           />
           <input
             type="text"
-            className="text-input-box"
+            className="text-input-box-location"
             placeholder="location"
             value={location}
             onChange={(event) => setLocation(event.target.value)}
@@ -86,8 +88,8 @@ const CreatePost = () => {
             Post
           </button>
         </form>
+        </div>
       </div>
-    </div>
   );
 };
 

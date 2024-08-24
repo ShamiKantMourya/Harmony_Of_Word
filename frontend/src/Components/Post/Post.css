@@ -22,13 +22,13 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 500px;
+  height: 550px;
   width: 500px;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(189, 179, 179, 0.8);
   margin-top: 5px;
   border-radius: 5px;
   padding: 10px 10px;

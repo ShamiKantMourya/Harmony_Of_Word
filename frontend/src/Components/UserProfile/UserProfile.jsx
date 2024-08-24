@@ -163,7 +163,7 @@ const UserProfile = () => {
               </button>
               <Typography>{user.following.length}</Typography>
             </div>
-            <div className="user-post1">
+            <div className="user-post">
               <p className="post-text"> Post</p>
               <Typography>{user.posts.length}</Typography>
             </div>
